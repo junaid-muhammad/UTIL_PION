@@ -10,7 +10,7 @@
 # Copyright (c) trottar & junaid
 #
 
-while getopts 'hrs' flag; do
+while getopts 'chrs' flag; do
     case "${flag}" in
         h) 
         echo "-------------------------------------------------------------------"
@@ -19,7 +19,7 @@ while getopts 'hrs' flag; do
         echo
         echo "The following flags can be called for the heep analysis..."
 	echo "    If no flags called arguments are..."
-	echo "        coin -> RunList = arg1 RunType=arg2"
+	echo "    -c  coin -> RunList = arg1 RunType=arg2"
 	echo "        sing -> RunList = arg1 RunType=arg2 SPEC=arg3 (requires -s flag)"		
         echo "    -h, help"
 	echo "    -r, run hgcer root analysis (not using this flag for now)"
@@ -30,6 +30,7 @@ while getopts 'hrs' flag; do
         ;;
 	r) r_flag='true' ;;
 	s) s_flag='true' ;;
+        c) s_flag='true' ;;
         *) print_usage
         exit 1 ;;
     esac
@@ -83,7 +84,7 @@ if [[ $s_flag = "true" ]]; then
         echo "Please Provide RUNTYPE"
     fi    
 
-else
+elif [[ $c_flag = "true" ]]; then
     RunType=$3
     if [[ $RunType = "HeePCoin" ]]; then
         ROOTPREFIX=PionLT_replay_HeeP_coin
@@ -104,6 +105,8 @@ else
     else
         echo "Please Provide RUNTYPE"
     fi    
+else
+    echo "Please Provide correct arguemnts"
 fi
 
 if [[ $r_flag = "true" ]]; then

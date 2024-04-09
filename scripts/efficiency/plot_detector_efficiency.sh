@@ -35,7 +35,7 @@ ANATYPE=`echo ${PATHFILE_INFO} | cut -d ','  -f13`
 USER=`echo ${PATHFILE_INFO} | cut -d ','  -f14`
 HOST=`echo ${PATHFILE_INFO} | cut -d ','  -f15`
 
-while getopts 'hs' flag; do
+while getopts 'hsc' flag; do
     case "${flag}" in
         h) 
         echo "-------------------------------------------------------------------"
@@ -44,53 +44,82 @@ while getopts 'hs' flag; do
         echo
         echo "The following flags can be called to check efficiency table..."
 	echo "    If no flags called arguments are..."
-	echo "        coin -> RUNTYPE=arg1 RUNNUM=arg2"
-	echo "        sing -> RUNTYPE=arg1 SPEC=arg2 RUNNUM=arg3 (requires -s flag)"		
+	echo "    -c  coin -> RUNTYPE=arg1 RunList = arg2 (requires -c flag)"
         echo "    -h, help"
-	echo "    -s, single arm"
+	echo "    -s, sing -> RUNTYPE=arg1 RunList = arg2 SPEC=arg3 (requires -s flag)"
         exit 0
         ;;
 	s) s_flag='true' ;;
+        c) c_flag='true' ;;
         *) print_usage
         exit 1 ;;
     esac
 done
 
-if [[ $s_flag = "true" ]]; then
-    RUNTYPE=$2
-    spec=$(echo "$3" | tr '[:upper:]' '[:lower:]')
-    SPEC=$(echo "$spec" | tr '[:lower:]' '[:upper:]')
-    COLUMN1=$4
-#    COLUMN1=Run_Number
-    COLUMN2=$5
-    TIMESTMP="2024_03_02"
-    if [[ $RUNTYPE = "HeePSing" ]]; then
-	ROOTPREFIX=PionLT_${SPEC}_HeePSing
-    elif [[ $RUNTYPE = "LumiSing" ]]; then
-        ROOTPREFIX=PionLT_${SPEC}_Lumi
-    else
-	echo "Please Provide RUNTYPE"
-    fi
-
-else
-    RUNTYPE=$1
-    COLUMN1=$2
-#    COLUMN1=Run_Number
-    COLUMN2=$3
-    TIMESTMP="2024_03_02"
-    if [[ $RUNTYPE = "HeePCoin" ]]; then
-        ROOTPREFIX=PionLT_HeeP_coin
-    elif [[ $RUNTYPE = "LumiCoin" ]]; then
-        ROOTPREFIX=PionLT_Lumi_coin
-    elif [[ $RUNTYPE = "Prod" ]]; then
-        ROOTPREFIX=PionLT_coin_production
-    elif [[ $RUNTYPE = "pTRIG6" ]]; then
-        ROOTPREFIX=PionLT_coin_production_pTRIG6
-    else
-        echo "Please Provide RUNTYPE"
-    fi
-fi
+RunList=$3
 
 cd "${SCRIPTPATH}/efficiency/src/"
 
-python3 display_columns.py $ROOTPREFIX $RUNTYPE $TIMESTMP $COLUMN1 $COLUMN2
+if [[ $s_flag = "true" ]]; then
+    RUNTYPE=$2
+    spec=$(echo "$4" | tr '[:upper:]' '[:lower:]')
+    SPEC=$(echo "$spec" | tr '[:lower:]' '[:upper:]')
+    TIMESTMP="2024_03_02"
+    if [[ $RUNTYPE = "HeePSing" ]]; then
+	ROOTPREFIX=PionLT_${SPEC}_HeePSing
+        inputFile="${REPLAYPATH}/UTIL_BATCH/InputRunLists/eff_runlist/${RunList}"
+    elif [[ $RUNTYPE = "LumiSing" ]]; then
+        ROOTPREFIX=PionLT_${SPEC}_Lumi
+        inputFile="${REPLAYPATH}/UTIL_BATCH/InputRunLists/eff_runlist/${RunList}"
+    else	
+        echo "Please Provide RUNTYPE"
+    fi
+
+elif [[ $c_flag = "true" ]]; then
+    RUNTYPE=$2
+    TIMESTMP="2024_03_02"
+    if [[ $RUNTYPE = "HeePCoin" ]]; then
+        ROOTPREFIX=PionLT_HeeP_coin
+        inputFile="${REPLAYPATH}/UTIL_BATCH/InputRunLists/eff_runlist/${RunList}"
+    elif [[ $RUNTYPE = "LumiCoin" ]]; then
+        ROOTPREFIX=PionLT_Lumi_coin
+        inputFile="${REPLAYPATH}/UTIL_BATCH/InputRunLists/eff_runlist/${RunList}"
+    elif [[ $RUNTYPE = "Prod" ]]; then
+        ROOTPREFIX=PionLT_coin_production
+        inputFile="${REPLAYPATH}/UTIL_BATCH/InputRunLists/eff_runlist/${RunList}"
+    elif [[ $RUNTYPE = "pTRIG6" ]]; then
+        ROOTPREFIX=PionLT_coin_production_pTRIG6
+        inputFile="${REPLAYPATH}/UTIL_BATCH/InputRunLists/eff_runlist/${RunList}"
+    else
+        echo "Please Provide RUNTYPE"
+    fi
+else
+    echo "Please Provide RUNTYPE, RunList."
+fi
+
+while true; do
+      read -p "Do you wish to create efficiency plot for run list ${inputFile}? (Please answer yes or no) " yn
+      case $yn in
+           [Yy]* )
+               i=-1
+               (
+               ##Reads in input file##
+               while IFS='' read -r line || [[ -n "$line" ]]; do
+                   echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+                   echo "Run number read from file: $line"
+                   echo ""
+                   python3 plot/plot_heepcoin_detector_efficiency.py ${ROOTPREFIX} ${RUNTYPE} ${TIMESTMP} $line -1
+               done < "$inputFile"
+               )
+               break;;
+           [Nn]* )
+               exit;;
+           * ) echo "Please answer yes or no.";;
+      esac
+done
+
+#        convert *.png "${ROOTPREFIX}_${RUNTYPE}_${TIMESTMP}.pdf"
+#      evince "${RUNTYPE}_${TIMESTMP}.pdf"
+#        mv *.png png/
+#      rm -f *.png
+exit 1

@@ -24,9 +24,9 @@ branch_dict = {
     "H_dc_y_fp" : "H.dc.y_fp",
     "H_dc_xp_fp" : "H.dc.xp_fp",
     "H_dc_yp_fp" : "H.dc.yp_fp",
-    # xpfp -> Theta
+    # xptar -> Theta
     "H_gtr_xp" : "H.gtr.th",
-    # ypfp -> Phi
+    # yptar -> Phi
     "H_gtr_yp" : "H.gtr.ph",
     # dp is Delta
     "H_gtr_dp" : "H.gtr.dp",
@@ -84,9 +84,9 @@ branch_dict = {
     "P_dc_y_fp" : "P.dc.y_fp",
     "P_dc_xp_fp" : "P.dc.xp_fp",
     "P_dc_yp_fp" : "P.dc.yp_fp",
-    # xpfp -> Theta
+    # xptar -> Theta
     "P_gtr_xp" : "P.gtr.th",
-    # ypfp -> Phi
+    # yptar -> Phi
     "P_gtr_yp" : "P.gtr.ph",
     "P_gtr_p" : "P.gtr.p",
     # dp is Delta
