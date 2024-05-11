@@ -387,7 +387,7 @@ P_kin_secondary_pmiss_x_protons_dummy_prompt_cut_all = ROOT.TH1D("P_kin_secondar
 P_kin_secondary_pmiss_y_protons_dummy_prompt_cut_all = ROOT.TH1D("P_kin_secondary_pmiss_y_protons_dummy_prompt_cut_all", "Momentum_y Distribution; pmiss_y; Counts", 400, -0.4, 0.4)
 P_kin_secondary_pmiss_z_protons_dummy_prompt_cut_all = ROOT.TH1D("P_kin_secondary_pmiss_z_protons_dummy_prompt_cut_all", "Momentum_z Distribution; pmiss_z; Counts", 400, -0.5, 0.5)
 P_kin_secondary_Erecoil_protons_dummy_prompt_cut_all = ROOT.TH1D("P_kin_secondary_Erecoil_protons_dummy_prompt_cut_all", "Erecoil Distribution; Erecoil; Counts", 200, -0.8, 0.8)
-P_kin_secondary_emiss_protons_dummy_prompt_cut_all = ROOT.TH1D("P_kin_secondary_emiss_protons_dummy_prompt_cut_all", "Energy Distribution; emiss; Counts", 400, -0.5, 0.5)
+P_kin_secondary_emiss_protons_dummy_prompt_cut_all = ROOT.TH1D("P_kin_secondary_emiss_protons_dummy_prompt_cut_all", "Energy Distribution; emiss; Counts", 600, -0.5, 0.5)
 P_kin_secondary_Mrecoil_protons_dummy_prompt_cut_all = ROOT.TH1D("P_kin_secondary_Mrecoil_protons_dummy_prompt_cut_all", "Mrecoil Distribution; Mrecoil; Counts", 200, -0.8, 0.8)
 P_kin_secondary_W_protons_dummy_prompt_cut_all = ROOT.TH1D("P_kin_secondary_W_protons_dummy_prompt_cut_all", "W Distribution; W; Counts", 200, 0, 2)
 MMsquared_dummy_prompt_cut_all = ROOT.TH1D("MMsquared_dummy_prompt_cut_all", "Missing Mass Squared; MM^{2}_{p}; Counts", 200, -1., 1.)
@@ -438,7 +438,7 @@ P_kin_secondary_pmiss_x_protons_dummysub_data_cut_all = ROOT.TH1D("P_kin_seconda
 P_kin_secondary_pmiss_y_protons_dummysub_data_cut_all = ROOT.TH1D("P_kin_secondary_pmiss_y_protons_dummysub_data_cut_all", "Momentum_y Distribution; pmiss_y; Counts", 400, -0.4, 0.4)
 P_kin_secondary_pmiss_z_protons_dummysub_data_cut_all = ROOT.TH1D("P_kin_secondary_pmiss_z_protons_dummysub_data_cut_all", "Momentum_z Distribution; pmiss_z; Counts", 400, -0.5, 0.5)
 P_kin_secondary_Erecoil_protons_dummysub_data_cut_all = ROOT.TH1D("P_kin_secondary_Erecoil_protons_dummysub_data_cut_all", "Erecoil Distribution; Erecoil; Counts", 200, -0.8, 0.8)
-P_kin_secondary_emiss_protons_dummysub_data_cut_all = ROOT.TH1D("P_kin_secondary_emiss_protons_dummysub_data_cut_all", "Energy Distribution; emiss; Counts", 400, -0.5, 0.5)
+P_kin_secondary_emiss_protons_dummysub_data_cut_all = ROOT.TH1D("P_kin_secondary_emiss_protons_dummysub_data_cut_all", "Energy Distribution; emiss; Counts", 600, -0.5, 0.5)
 P_kin_secondary_Mrecoil_protons_dummysub_data_cut_all = ROOT.TH1D("P_kin_secondary_Mrecoil_protons_dummysub_data_cut_all", "Mrecoil Distribution; Mrecoil; Counts", 200, -0.8, 0.8)
 P_kin_secondary_W_protons_dummysub_data_cut_all = ROOT.TH1D("P_kin_secondary_W_protons_dummysub_data_cut_all", "W Distribution; W; Counts", 200, 0, 2)
 MMsquared_dummysub_data_cut_all = ROOT.TH1D("MMsquared_dummysub_data_cut_all", "Missing Mass Squared; MM^{2}_{p}; Counts", 200, -1., 1.)
@@ -478,7 +478,7 @@ pmiss_protons_simc_cut_all = ROOT.TH1D("pmiss_protons_simc_cut_all", "Momentum D
 pmiss_x_protons_simc_cut_all = ROOT.TH1D("pmiss_x_protons_simc_cut_all", "Momentum_x Distribution; pmiss_x; Counts", 400, -0.4, 0.4)
 pmiss_y_protons_simc_cut_all = ROOT.TH1D("pmiss_y_protons_simc_cut_all", "Momentum_y Distribution; pmiss_y; Counts", 400, -0.4, 0.4)
 pmiss_z_protons_simc_cut_all = ROOT.TH1D("pmiss_z_protons_simc_cut_all", "Momentum_z Distribution; pmiss_z; Counts", 400, -0.5, 0.5)
-emiss_protons_simc_cut_all = ROOT.TH1D("emiss_protons_simc_cut_all", "Energy Distribution; emiss; Counts",400, -0.5, 0.5)
+emiss_protons_simc_cut_all = ROOT.TH1D("emiss_protons_simc_cut_all", "Energy Distribution; emiss; Counts",600, -0.5, 0.5)
 W_protons_simc_cut_all = ROOT.TH1D("W_protons_simc_cut_all", "W Distribution; W; Counts", 200, 0, 2)
 MMp_protons_simc_cut_all = ROOT.TH1D("MMp_protons_simc_cut_all", "MIssing Mass SIMC (cut_all); MM_{p}; Counts", 200, -1, 1)
 
@@ -1095,13 +1095,13 @@ c1_fit.Divide(3,2)
 #c1_fit_text.SetTextSize(0.032)
 #c1_fit_text.SetTextAlign(22)
 #c1_fit_text.Draw()
-Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 10.549355, -5.878, 21.655, 5.530, 23.110
+#Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 10.549355, -5.878, 21.655, 5.530, 23.110
 #Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 5.984804, -3.271, 29.170, 3.493, 27.495
 #Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 6.394701, -4.752, 18.595, 2.412, 37.970
 #Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 6.394701, -4.391, 21.095, 2.792, 34.475
 #Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 6.394701, -3.014, 33.350, 4.220, 23.115
 #Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 7.937000, -3.283, 33.640, 5.512, 19.270
-#Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 8.478619, -5.587, 19.560, 3.731, 30.020
+Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 8.478619, -5.587, 19.560, 3.731, 30.020
 #Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 9.172705, -3.738, 31.645, 6.265, 18.125
 #Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 9.878908, -5.366, 23.050, 5.422, 23.050
 
@@ -1126,14 +1126,14 @@ b_mean_err_pmiss_x_simc = tmp_b_mean_pmiss_x_simc[1]
 tmp_b_mean_pmiss_x_data = fit_gaussian(P_kin_secondary_pmiss_x_protons_dummysub_data_cut_all,-0.1, 0.1, "data")
 b_mean_pmiss_x_data = tmp_b_mean_pmiss_x_data[0]
 b_mean_err_pmiss_x_data = tmp_b_mean_pmiss_x_data[1]
-#P_kin_secondary_pmiss_x_protons_dummysub_data_cut_all.GetXaxis().SetRangeUser(-0.2, 0.2)
-pmiss_x_protons_simc_cut_all.GetXaxis().SetRangeUser(-0.1, 0.1)
-pmiss_x_protons_simc_cut_all.SetLineColor(kRed)
-pmiss_x_protons_simc_cut_all.Draw("E1")
-P_kin_secondary_pmiss_x_protons_dummysub_data_cut_all.SetLineColor(kBlue)
-P_kin_secondary_pmiss_x_protons_dummysub_data_cut_all.Draw("same, E1")
+P_kin_secondary_pmiss_x_protons_dummysub_data_cut_all.GetXaxis().SetRangeUser(-0.2, 0.2)
+#pmiss_x_protons_simc_cut_all.GetXaxis().SetRangeUser(-0.1, 0.1)
 #pmiss_x_protons_simc_cut_all.SetLineColor(kRed)
-#pmiss_x_protons_simc_cut_all.Draw("same, E1")
+#pmiss_x_protons_simc_cut_all.Draw("E1")
+P_kin_secondary_pmiss_x_protons_dummysub_data_cut_all.SetLineColor(kBlue)
+P_kin_secondary_pmiss_x_protons_dummysub_data_cut_all.Draw("E1")
+pmiss_x_protons_simc_cut_all.SetLineColor(kRed)
+pmiss_x_protons_simc_cut_all.Draw("same, E1")
 pmiss_x_legend = TLegend(0.58, 0.7, 0.9, 0.9)
 pmiss_x_legend.SetBorderSize(1)
 pmiss_x_legend.SetFillColor(0)
@@ -1155,14 +1155,14 @@ b_mean_err_pmiss_y_simc = tmp_b_mean_pmiss_y_simc[1]
 tmp_b_mean_pmiss_y_data = fit_gaussian(P_kin_secondary_pmiss_y_protons_dummysub_data_cut_all,-0.1, 0.1, "data")
 b_mean_pmiss_y_data = tmp_b_mean_pmiss_y_data[0]
 b_mean_err_pmiss_y_data = tmp_b_mean_pmiss_y_data[1]
-#P_kin_secondary_pmiss_y_protons_dummysub_data_cut_all.GetXaxis().SetRangeUser(-0.2, 0.2)
-pmiss_y_protons_simc_cut_all.GetXaxis().SetRangeUser(-0.1, 0.1)
-pmiss_y_protons_simc_cut_all.SetLineColor(kRed)
-pmiss_y_protons_simc_cut_all.Draw("E1")
-P_kin_secondary_pmiss_y_protons_dummysub_data_cut_all.SetLineColor(kBlue)
-P_kin_secondary_pmiss_y_protons_dummysub_data_cut_all.Draw("same, E1")
+P_kin_secondary_pmiss_y_protons_dummysub_data_cut_all.GetXaxis().SetRangeUser(-0.2, 0.2)
+#pmiss_y_protons_simc_cut_all.GetXaxis().SetRangeUser(-0.1, 0.1)
 #pmiss_y_protons_simc_cut_all.SetLineColor(kRed)
-#pmiss_y_protons_simc_cut_all.Draw("same, E1")
+#pmiss_y_protons_simc_cut_all.Draw("E1")
+P_kin_secondary_pmiss_y_protons_dummysub_data_cut_all.SetLineColor(kBlue)
+P_kin_secondary_pmiss_y_protons_dummysub_data_cut_all.Draw("E1")
+pmiss_y_protons_simc_cut_all.SetLineColor(kRed)
+pmiss_y_protons_simc_cut_all.Draw("same, E1")
 pmiss_y_legend = TLegend(0.58, 0.7, 0.9, 0.9)
 pmiss_y_legend.SetBorderSize(1)
 pmiss_y_legend.SetFillColor(0)
@@ -1184,14 +1184,14 @@ b_mean_err_pmiss_z_simc = tmp_b_mean_pmiss_z_simc[1]
 tmp_b_mean_pmiss_z_data = fit_gaussian(P_kin_secondary_pmiss_z_protons_dummysub_data_cut_all,-0.1, 0.1, "data")
 b_mean_pmiss_z_data = tmp_b_mean_pmiss_z_data[0]
 b_mean_err_pmiss_z_data = tmp_b_mean_pmiss_z_data[1]
-#P_kin_secondary_pmiss_z_protons_dummysub_data_cut_all.GetXaxis().SetRangeUser(-0.2, 0.2)
-pmiss_z_protons_simc_cut_all.GetXaxis().SetRangeUser(-0.1, 0.1)
-pmiss_z_protons_simc_cut_all.SetLineColor(kRed)
-pmiss_z_protons_simc_cut_all.Draw("E1")
-P_kin_secondary_pmiss_z_protons_dummysub_data_cut_all.SetLineColor(kBlue)
-P_kin_secondary_pmiss_z_protons_dummysub_data_cut_all.Draw("same, E1")
+P_kin_secondary_pmiss_z_protons_dummysub_data_cut_all.GetXaxis().SetRangeUser(-0.2, 0.2)
+#pmiss_z_protons_simc_cut_all.GetXaxis().SetRangeUser(-0.1, 0.1)
 #pmiss_z_protons_simc_cut_all.SetLineColor(kRed)
-#pmiss_z_protons_simc_cut_all.Draw("same, E1")
+#pmiss_z_protons_simc_cut_all.Draw("E1")
+P_kin_secondary_pmiss_z_protons_dummysub_data_cut_all.SetLineColor(kBlue)
+P_kin_secondary_pmiss_z_protons_dummysub_data_cut_all.Draw("E1")
+pmiss_z_protons_simc_cut_all.SetLineColor(kRed)
+pmiss_z_protons_simc_cut_all.Draw("same, E1")
 pmiss_z_legend = TLegend(0.58, 0.7, 0.9, 0.9)
 pmiss_z_legend.SetBorderSize(1)
 pmiss_z_legend.SetFillColor(0)
@@ -1213,14 +1213,14 @@ b_mean_err_emiss_simc = tmp_b_mean_emiss_simc[1]
 tmp_b_mean_emiss_data = fit_gaussian(P_kin_secondary_emiss_protons_dummysub_data_cut_all,-0.1, 0.1, "data")
 b_mean_emiss_data = tmp_b_mean_emiss_data[0]
 b_mean_err_emiss_data = tmp_b_mean_emiss_data[1]
-#P_kin_secondary_emiss_protons_dummysub_data_cut_all.GetXaxis().SetRangeUser(-0.2, 0.2)
-emiss_protons_simc_cut_all.GetXaxis().SetRangeUser(-0.2, 0.2)
-emiss_protons_simc_cut_all.SetLineColor(kRed)
-emiss_protons_simc_cut_all.Draw("E1")
-P_kin_secondary_emiss_protons_dummysub_data_cut_all.SetLineColor(kBlue)
-P_kin_secondary_emiss_protons_dummysub_data_cut_all.Draw("same, E1")
+P_kin_secondary_emiss_protons_dummysub_data_cut_all.GetXaxis().SetRangeUser(-0.2, 0.2)
+#emiss_protons_simc_cut_all.GetXaxis().SetRangeUser(-0.2, 0.2)
 #emiss_protons_simc_cut_all.SetLineColor(kRed)
-#emiss_protons_simc_cut_all.Draw("same, E1")
+#emiss_protons_simc_cut_all.Draw("E1")
+P_kin_secondary_emiss_protons_dummysub_data_cut_all.SetLineColor(kBlue)
+P_kin_secondary_emiss_protons_dummysub_data_cut_all.Draw("E1")
+emiss_protons_simc_cut_all.SetLineColor(kRed)
+emiss_protons_simc_cut_all.Draw("same, E1")
 emiss_legend = TLegend(0.58, 0.7, 0.9, 0.9)
 emiss_legend.SetBorderSize(1)
 emiss_legend.SetFillColor(0)
@@ -1242,14 +1242,14 @@ b_mean_err_W_simc = tmp_b_mean_W_simc[1]
 tmp_b_mean_W_data = fit_gaussian(P_kin_secondary_W_protons_dummysub_data_cut_all,0.7, 1.1, "data")
 b_mean_W_data = tmp_b_mean_W_data[0]
 b_mean_err_W_data = tmp_b_mean_W_data[1]
-#P_kin_secondary_W_protons_dummysub_data_cut_all.GetXaxis().SetRangeUser(0.6, 1.4)
-W_protons_simc_cut_all.GetXaxis().SetRangeUser(0.6, 1.4)
-W_protons_simc_cut_all.SetLineColor(kRed)
-W_protons_simc_cut_all.Draw("E1")
-P_kin_secondary_W_protons_dummysub_data_cut_all.SetLineColor(kBlue)
-P_kin_secondary_W_protons_dummysub_data_cut_all.Draw("same, E1")
+P_kin_secondary_W_protons_dummysub_data_cut_all.GetXaxis().SetRangeUser(0.6, 1.4)
+#W_protons_simc_cut_all.GetXaxis().SetRangeUser(0.6, 1.4)
 #W_protons_simc_cut_all.SetLineColor(kRed)
-#W_protons_simc_cut_all.Draw("same, E1")
+#W_protons_simc_cut_all.Draw("E1")
+P_kin_secondary_W_protons_dummysub_data_cut_all.SetLineColor(kBlue)
+P_kin_secondary_W_protons_dummysub_data_cut_all.Draw("E1")
+W_protons_simc_cut_all.SetLineColor(kRed)
+W_protons_simc_cut_all.Draw("same, E1")
 W_legend = TLegend(0.58, 0.7, 0.9, 0.9)
 W_legend.SetBorderSize(1)
 W_legend.SetFillColor(0)
@@ -1274,12 +1274,12 @@ ROOT.gStyle.SetOptStat(0)
 # Saving histograms in PDF
 c1_delta = TCanvas("c1_delta", "Delta and Target Distributions", 100, 0, 1400, 600)
 c1_delta.Divide(3,2)
-Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 10.549355, -5.878, 21.655, 5.530, 23.110
+#Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 10.549355, -5.878, 21.655, 5.530, 23.110
 #Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 5.984804, -3.271, 29.170, 3.493, 27.495
 #Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 6.394701, -4.752, 18.595, 2.412, 37.970
 #Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 6.394701, -4.391, 21.095, 2.792, 34.475
 #Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 6.394701, -3.014, 33.350, 4.220, 23.115
-#Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 7.937000, -3.283, 33.640, 5.512, 19.270
+Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 7.937000, -3.283, 33.640, 5.512, 19.270
 #Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 8.478619, -5.587, 19.560, 3.731, 30.020
 #Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 9.172705, -3.738, 31.645, 6.265, 18.125
 #Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 9.878908, -5.366, 23.050, 5.422, 23.050
@@ -1301,7 +1301,7 @@ for c1_delta_text in c1_delta_text_lines:
     if c1_delta_text.GetTitle() == "Red = SIMC":
        c1_delta_text.SetTextColor(ROOT.kRed)  # Setting text color to red
     if c1_delta_text.GetTitle() == "Blue = DATA":
-       c1_delta_text.SetTextColor(ROOT.kBlue)  # Setting text color to red
+       c1_delta_text.SetTextColor(ROOT.kBlue)  # Setting text color to blue
     c1_delta_text.Draw()
 c1_delta.cd(2)
 #H_hsdelta_protons_simc_cut_all.GetXaxis().SetRangeUser(-15, 15)
@@ -1410,14 +1410,14 @@ b_mean_err_pmiss_x_simc = tmp_b_mean_pmiss_x_simc[1]
 tmp_b_mean_pmiss_x_data = fit_gaussian(P_kin_secondary_pmiss_x_protons_dummysub_data_cut_all,-0.1, 0.1, "data")
 b_mean_pmiss_x_data = tmp_b_mean_pmiss_x_data[0]
 b_mean_err_pmiss_x_data = tmp_b_mean_pmiss_x_data[1]
-#P_kin_secondary_pmiss_x_protons_dummysub_data_cut_all.GetXaxis().SetRangeUser(-0.2, 0.2)
-pmiss_x_protons_simc_cut_all.GetXaxis().SetRangeUser(-0.1, 0.1)
-pmiss_x_protons_simc_cut_all.SetLineColor(kRed)
-pmiss_x_protons_simc_cut_all.Draw("E1")
-P_kin_secondary_pmiss_x_protons_dummysub_data_cut_all.SetLineColor(kBlue)
-P_kin_secondary_pmiss_x_protons_dummysub_data_cut_all.Draw("same, E1")
+P_kin_secondary_pmiss_x_protons_dummysub_data_cut_all.GetXaxis().SetRangeUser(-0.2, 0.2)
+#pmiss_x_protons_simc_cut_all.GetXaxis().SetRangeUser(-0.1, 0.1)
 #pmiss_x_protons_simc_cut_all.SetLineColor(kRed)
-#pmiss_x_protons_simc_cut_all.Draw("same, E1")
+#pmiss_x_protons_simc_cut_all.Draw("E1")
+P_kin_secondary_pmiss_x_protons_dummysub_data_cut_all.SetLineColor(kBlue)
+P_kin_secondary_pmiss_x_protons_dummysub_data_cut_all.Draw("E1")
+pmiss_x_protons_simc_cut_all.SetLineColor(kRed)
+pmiss_x_protons_simc_cut_all.Draw("same, E1")
 pmiss_x_legend = TLegend(0.58, 0.7, 0.9, 0.9)
 pmiss_x_legend.SetBorderSize(1)
 pmiss_x_legend.SetFillColor(0)
@@ -1439,14 +1439,14 @@ b_mean_err_pmiss_y_simc = tmp_b_mean_pmiss_y_simc[1]
 tmp_b_mean_pmiss_y_data = fit_gaussian(P_kin_secondary_pmiss_y_protons_dummysub_data_cut_all,-0.1, 0.1, "data")
 b_mean_pmiss_y_data = tmp_b_mean_pmiss_y_data[0]
 b_mean_err_pmiss_y_data = tmp_b_mean_pmiss_y_data[1]
-#P_kin_secondary_pmiss_y_protons_dummysub_data_cut_all.GetXaxis().SetRangeUser(-0.2, 0.2)
-pmiss_y_protons_simc_cut_all.GetXaxis().SetRangeUser(-0.1, 0.1)
-pmiss_y_protons_simc_cut_all.SetLineColor(kRed)
-pmiss_y_protons_simc_cut_all.Draw("E1")
-P_kin_secondary_pmiss_y_protons_dummysub_data_cut_all.SetLineColor(kBlue)
-P_kin_secondary_pmiss_y_protons_dummysub_data_cut_all.Draw("same, E1")
+P_kin_secondary_pmiss_y_protons_dummysub_data_cut_all.GetXaxis().SetRangeUser(-0.2, 0.2)
+#pmiss_y_protons_simc_cut_all.GetXaxis().SetRangeUser(-0.1, 0.1)
 #pmiss_y_protons_simc_cut_all.SetLineColor(kRed)
-#pmiss_y_protons_simc_cut_all.Draw("same, E1")
+#pmiss_y_protons_simc_cut_all.Draw("E1")
+P_kin_secondary_pmiss_y_protons_dummysub_data_cut_all.SetLineColor(kBlue)
+P_kin_secondary_pmiss_y_protons_dummysub_data_cut_all.Draw("E1")
+pmiss_y_protons_simc_cut_all.SetLineColor(kRed)
+pmiss_y_protons_simc_cut_all.Draw("same, E1")
 pmiss_y_legend = TLegend(0.58, 0.7, 0.9, 0.9)
 pmiss_y_legend.SetBorderSize(1)
 pmiss_y_legend.SetFillColor(0)
@@ -1468,14 +1468,14 @@ b_mean_err_pmiss_z_simc = tmp_b_mean_pmiss_z_simc[1]
 tmp_b_mean_pmiss_z_data = fit_gaussian(P_kin_secondary_pmiss_z_protons_dummysub_data_cut_all,-0.1, 0.1, "data")
 b_mean_pmiss_z_data = tmp_b_mean_pmiss_z_data[0]
 b_mean_err_pmiss_z_data = tmp_b_mean_pmiss_z_data[1]
-#P_kin_secondary_pmiss_z_protons_dummysub_data_cut_all.GetXaxis().SetRangeUser(-0.2, 0.2)
-pmiss_z_protons_simc_cut_all.GetXaxis().SetRangeUser(-0.1, 0.1)
-pmiss_z_protons_simc_cut_all.SetLineColor(kRed)
-pmiss_z_protons_simc_cut_all.Draw("E1")
-P_kin_secondary_pmiss_z_protons_dummysub_data_cut_all.SetLineColor(kBlue)
-P_kin_secondary_pmiss_z_protons_dummysub_data_cut_all.Draw("same, E1")
+P_kin_secondary_pmiss_z_protons_dummysub_data_cut_all.GetXaxis().SetRangeUser(-0.2, 0.2)
+#pmiss_z_protons_simc_cut_all.GetXaxis().SetRangeUser(-0.1, 0.1)
 #pmiss_z_protons_simc_cut_all.SetLineColor(kRed)
-#pmiss_z_protons_simc_cut_all.Draw("same, E1")
+#pmiss_z_protons_simc_cut_all.Draw("E1")
+P_kin_secondary_pmiss_z_protons_dummysub_data_cut_all.SetLineColor(kBlue)
+P_kin_secondary_pmiss_z_protons_dummysub_data_cut_all.Draw("E1")
+pmiss_z_protons_simc_cut_all.SetLineColor(kRed)
+pmiss_z_protons_simc_cut_all.Draw("same, E1")
 pmiss_z_legend = TLegend(0.58, 0.7, 0.9, 0.9)
 pmiss_z_legend.SetBorderSize(1)
 pmiss_z_legend.SetFillColor(0)
@@ -1497,14 +1497,14 @@ b_mean_err_pmiss_simc = tmp_b_mean_pmiss_simc[1]
 tmp_b_mean_pmiss_data = fit_gaussian(P_kin_secondary_pmiss_protons_dummysub_data_cut_all,-0.1, 0.1, "data")
 b_mean_pmiss_data = tmp_b_mean_pmiss_data[0]
 b_mean_err_pmiss_data = tmp_b_mean_pmiss_data[1]
-#P_kin_secondary_pmiss_protons_dummysub_data_cut_all.GetXaxis().SetRangeUser(-0.1, 0.3)
-pmiss_protons_simc_cut_all.GetXaxis().SetRangeUser(-0.1, 0.3)
-pmiss_protons_simc_cut_all.SetLineColor(kRed)
-pmiss_protons_simc_cut_all.Draw("E1")
-P_kin_secondary_pmiss_protons_dummysub_data_cut_all.SetLineColor(kBlue)
-P_kin_secondary_pmiss_protons_dummysub_data_cut_all.Draw("same, E1")
+P_kin_secondary_pmiss_protons_dummysub_data_cut_all.GetXaxis().SetRangeUser(-0.1, 0.3)
+#pmiss_protons_simc_cut_all.GetXaxis().SetRangeUser(-0.1, 0.3)
 #pmiss_protons_simc_cut_all.SetLineColor(kRed)
-#pmiss_protons_simc_cut_all.Draw("same, E1")
+#pmiss_protons_simc_cut_all.Draw("E1")
+P_kin_secondary_pmiss_protons_dummysub_data_cut_all.SetLineColor(kBlue)
+P_kin_secondary_pmiss_protons_dummysub_data_cut_all.Draw("E1")
+pmiss_protons_simc_cut_all.SetLineColor(kRed)
+pmiss_protons_simc_cut_all.Draw("same, E1")
 pmiss_legend = TLegend(0.58, 0.7, 0.9, 0.9)
 pmiss_legend.SetBorderSize(1)
 pmiss_legend.SetFillColor(0)
@@ -1526,14 +1526,14 @@ b_mean_err_emiss_simc = tmp_b_mean_emiss_simc[1]
 tmp_b_mean_emiss_data = fit_gaussian(P_kin_secondary_emiss_protons_dummysub_data_cut_all,-0.1, 0.1, "data")
 b_mean_emiss_data = tmp_b_mean_emiss_data[0]
 b_mean_err_emiss_data = tmp_b_mean_emiss_data[1]
-#P_kin_secondary_emiss_protons_dummysub_data_cut_all.GetXaxis().SetRangeUser(-0.2, 0.2)
-emiss_protons_simc_cut_all.GetXaxis().SetRangeUser(-0.2, 0.2)
-emiss_protons_simc_cut_all.SetLineColor(kRed)
-emiss_protons_simc_cut_all.Draw("E1")
-P_kin_secondary_emiss_protons_dummysub_data_cut_all.SetLineColor(kBlue)
-P_kin_secondary_emiss_protons_dummysub_data_cut_all.Draw("same, E1")
+P_kin_secondary_emiss_protons_dummysub_data_cut_all.GetXaxis().SetRangeUser(-0.2, 0.2)
+#emiss_protons_simc_cut_all.GetXaxis().SetRangeUser(-0.2, 0.2)
 #emiss_protons_simc_cut_all.SetLineColor(kRed)
-#emiss_protons_simc_cut_all.Draw("same, E1")
+#emiss_protons_simc_cut_all.Draw("E1")
+P_kin_secondary_emiss_protons_dummysub_data_cut_all.SetLineColor(kBlue)
+P_kin_secondary_emiss_protons_dummysub_data_cut_all.Draw("E1")
+emiss_protons_simc_cut_all.SetLineColor(kRed)
+emiss_protons_simc_cut_all.Draw("same, E1")
 emiss_legend = TLegend(0.58, 0.7, 0.9, 0.9)
 emiss_legend.SetBorderSize(1)
 emiss_legend.SetFillColor(0)
@@ -1555,14 +1555,14 @@ b_mean_err_W_simc = tmp_b_mean_W_simc[1]
 tmp_b_mean_W_data = fit_gaussian(P_kin_secondary_W_protons_dummysub_data_cut_all,0.7, 1.1, "data")
 b_mean_W_data = tmp_b_mean_W_data[0]
 b_mean_err_W_data = tmp_b_mean_W_data[1]
-#P_kin_secondary_W_protons_dummysub_data_cut_all.GetXaxis().SetRangeUser(0.6, 1.4)
-W_protons_simc_cut_all.GetXaxis().SetRangeUser(0.6, 1.4)
-W_protons_simc_cut_all.SetLineColor(kRed)
-W_protons_simc_cut_all.Draw("E1")
-P_kin_secondary_W_protons_dummysub_data_cut_all.SetLineColor(kBlue)
-P_kin_secondary_W_protons_dummysub_data_cut_all.Draw("same, E1")
+P_kin_secondary_W_protons_dummysub_data_cut_all.GetXaxis().SetRangeUser(0.6, 1.4)
+#W_protons_simc_cut_all.GetXaxis().SetRangeUser(0.6, 1.4)
 #W_protons_simc_cut_all.SetLineColor(kRed)
-#W_protons_simc_cut_all.Draw("same, E1")
+#W_protons_simc_cut_all.Draw("E1")
+P_kin_secondary_W_protons_dummysub_data_cut_all.SetLineColor(kBlue)
+P_kin_secondary_W_protons_dummysub_data_cut_all.Draw("E1")
+W_protons_simc_cut_all.SetLineColor(kRed)
+W_protons_simc_cut_all.Draw("same, E1")
 W_legend = TLegend(0.58, 0.7, 0.9, 0.9)
 W_legend.SetBorderSize(1)
 W_legend.SetFillColor(0)

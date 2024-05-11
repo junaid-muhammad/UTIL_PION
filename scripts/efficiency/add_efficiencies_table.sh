@@ -30,7 +30,7 @@ while getopts 'chrs' flag; do
         ;;
 	r) r_flag='true' ;;
 	s) s_flag='true' ;;
-        c) s_flag='true' ;;
+        c) c_flag='true' ;;
         *) print_usage
         exit 1 ;;
     esac

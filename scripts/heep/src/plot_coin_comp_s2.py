@@ -1290,11 +1290,18 @@ c1_delta_text_lines = [
     TText(0.5, 0.7, 'HMS_p = ' + str(HMS_p)),
     TText(0.5, 0.6, 'HMS_theta = ' + str(HMS_theta)),
     TText(0.5, 0.5, 'SHMS_p = ' + str(SHMS_p)),
-    TText(0.5, 0.4, 'SHMS_theta = ' + str(SHMS_theta))
+    TText(0.5, 0.4, 'SHMS_theta = ' + str(SHMS_theta)),
+    TText(0.5, 0.3, "Red = SIMC"),
+    TText(0.5, 0.2, "Blue = DATA")
 ]
 for c1_delta_text in c1_delta_text_lines:
     c1_delta_text.SetTextSize(0.07)
     c1_delta_text.SetTextAlign(22)
+    c1_delta_text.SetTextColor(ROOT.kGreen + 4)
+    if c1_delta_text.GetTitle() == "Red = SIMC":
+       c1_delta_text.SetTextColor(ROOT.kRed)  # Setting text color to red
+    if c1_delta_text.GetTitle() == "Blue = DATA":
+       c1_delta_text.SetTextColor(ROOT.kBlue)  # Setting text color to blue
     c1_delta_text.Draw()
 c1_delta.cd(2)
 H_hsdelta_protons_simc_cut_all.GetXaxis().SetRangeUser(-15, 15)

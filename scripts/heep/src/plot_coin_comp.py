@@ -811,7 +811,7 @@ P_kin_MMp_protons_cut_random_sub.Add(P_kin_MMp_protons_cut_prompt, P_kin_MMp_pro
 normfac_data = 1.0/(total_data_effective_charge)
 dummy_target_corr = 4.8579
 normfac_dummy = 1.0/(total_dummy_effective_charge*dummy_target_corr)
-normfac_simc = (simc_normfactor)/(simc_nevents)
+normfac_simc = 4*(simc_normfactor)/(simc_nevents)
 
 '''
 num_events_data = int(H_W_DATA.Integral()) - int(H_W_DUMMY.Integral())
@@ -1079,7 +1079,7 @@ def fit_gaussian(hist, x_min, x_max, dtype):
     return [mean, mean_err]
 
 ###########################################################################################################################################
-
+'''
 ROOT.gStyle.SetOptStat(0)
 c1_fit = TCanvas("c1_fit", "Missing Mass and Momentum Distributions", 100, 0, 1400,600)
 c1_fit.Divide(3,2)
@@ -1096,14 +1096,14 @@ c1_fit.Divide(3,2)
 #c1_fit_text.SetTextAlign(22)
 #c1_fit_text.Draw()
 #Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 10.549355, -5.878, 21.655, 5.530, 23.110
-#Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 5.984804, -3.271, 29.170, 3.493, 27.495
+Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 5.984804, -3.271, 29.170, 3.493, 27.495
 #Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 6.394701, -4.752, 18.595, 2.412, 37.970
 #Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 6.394701, -4.391, 21.095, 2.792, 34.475
 #Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 6.394701, -3.014, 33.350, 4.220, 23.115
 #Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 7.937000, -3.283, 33.640, 5.512, 19.270
 #Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 8.478619, -5.587, 19.560, 3.731, 30.020
 #Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 9.172705, -3.738, 31.645, 6.265, 18.125
-Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 9.878908, -5.366, 23.050, 5.422, 23.050
+#Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 9.878908, -5.366, 23.050, 5.422, 23.050
 
 c1_fit.cd(1)
 c1_fit_text_lines = [
@@ -1265,9 +1265,9 @@ W_fit_func_simc.SetLineWidth(1)
 W_fit_func_data = P_kin_secondary_W_protons_dummysub_data_cut_all.GetFunction('gaus')
 W_fit_func_data.SetLineWidth(1)
 c1_fit.Print(Proton_Analysis_Distributions)
-
-############################################################################################################################################
 '''
+############################################################################################################################################
+
 # Removes stat box
 ROOT.gStyle.SetOptStat(0)
 
@@ -1279,10 +1279,10 @@ c1_delta.Divide(3,2)
 #Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 6.394701, -4.752, 18.595, 2.412, 37.970
 #Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 6.394701, -4.391, 21.095, 2.792, 34.475
 #Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 6.394701, -3.014, 33.350, 4.220, 23.115
-Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 7.937000, -3.283, 33.640, 5.512, 19.270
+#Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 7.937000, -3.283, 33.640, 5.512, 19.270
 #Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 8.478619, -5.587, 19.560, 3.731, 30.020
 #Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 9.172705, -3.738, 31.645, 6.265, 18.125
-#Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 9.878908, -5.366, 23.050, 5.422, 23.050
+Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 9.878908, -5.366, 23.050, 5.422, 23.050
 c1_delta.cd(1)
 c1_delta_text_lines = [
     TText(0.5, 0.9, "HeePCoin Setting"),
@@ -1290,11 +1290,18 @@ c1_delta_text_lines = [
     TText(0.5, 0.7, 'HMS_p = ' + str(HMS_p)),
     TText(0.5, 0.6, 'HMS_theta = ' + str(HMS_theta)),
     TText(0.5, 0.5, 'SHMS_p = ' + str(SHMS_p)),
-    TText(0.5, 0.4, 'SHMS_theta = ' + str(SHMS_theta))
+    TText(0.5, 0.4, 'SHMS_theta = ' + str(SHMS_theta)),
+    TText(0.5, 0.3, "Red = SIMC"),
+    TText(0.5, 0.2, "Blue = DATA")
 ]
 for c1_delta_text in c1_delta_text_lines:
     c1_delta_text.SetTextSize(0.07)
     c1_delta_text.SetTextAlign(22)
+    c1_delta_text.SetTextColor(ROOT.kGreen + 4)
+    if c1_delta_text.GetTitle() == "Red = SIMC":
+       c1_delta_text.SetTextColor(ROOT.kRed)  # Setting text color to red
+    if c1_delta_text.GetTitle() == "Blue = DATA":
+       c1_delta_text.SetTextColor(ROOT.kBlue)  # Setting text color to blue
     c1_delta_text.Draw()
 c1_delta.cd(2)
 #H_hsdelta_protons_simc_cut_all.GetXaxis().SetRangeUser(-15, 15)
@@ -1571,7 +1578,7 @@ W_fit_func_simc.SetLineWidth(1)
 W_fit_func_data = P_kin_secondary_W_protons_dummysub_data_cut_all.GetFunction('gaus')
 W_fit_func_data.SetLineWidth(1)
 c1_fit.Print(Proton_Analysis_Distributions + ')')
-'''
+
 #############################################################################################################################################
 
 # Making directories in output file

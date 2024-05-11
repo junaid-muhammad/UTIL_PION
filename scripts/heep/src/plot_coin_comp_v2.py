@@ -1096,13 +1096,13 @@ c1_fit.Divide(3,2)
 #c1_fit_text.SetTextAlign(22)
 #c1_fit_text.Draw()
 #Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 10.549355, -5.878, 21.655, 5.530, 23.110
-#Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 5.984804, -3.271, 29.170, 3.493, 27.495
+Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 5.984804, -3.271, 29.170, 3.493, 27.495
 #Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 6.394701, -4.752, 18.595, 2.412, 37.970
 #Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 6.394701, -4.391, 21.095, 2.792, 34.475
 #Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 6.394701, -3.014, 33.350, 4.220, 23.115
 #Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 7.937000, -3.283, 33.640, 5.512, 19.270
 #Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 8.478619, -5.587, 19.560, 3.731, 30.020
-Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 9.172705, -3.738, 31.645, 6.265, 18.125
+#Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 9.172705, -3.738, 31.645, 6.265, 18.125
 #Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 9.878908, -5.366, 23.050, 5.422, 23.050
 
 c1_fit.cd(1)
@@ -1160,9 +1160,9 @@ P_kin_secondary_pmiss_y_protons_dummysub_data_cut_all.GetXaxis().SetRangeUser(-0
 #pmiss_y_protons_simc_cut_all.SetLineColor(kRed)
 #pmiss_y_protons_simc_cut_all.Draw("E1")
 P_kin_secondary_pmiss_y_protons_dummysub_data_cut_all.SetLineColor(kBlue)
-P_kin_secondary_pmiss_y_protons_dummysub_data_cut_all.Draw("same, E1")
+P_kin_secondary_pmiss_y_protons_dummysub_data_cut_all.Draw("E1")
 pmiss_y_protons_simc_cut_all.SetLineColor(kRed)
-pmiss_y_protons_simc_cut_all.Draw("E1")
+pmiss_y_protons_simc_cut_all.Draw("same, E1")
 pmiss_y_legend = TLegend(0.58, 0.7, 0.9, 0.9)
 pmiss_y_legend.SetBorderSize(1)
 pmiss_y_legend.SetFillColor(0)
@@ -1189,9 +1189,9 @@ P_kin_secondary_pmiss_z_protons_dummysub_data_cut_all.GetXaxis().SetRangeUser(-0
 #pmiss_z_protons_simc_cut_all.SetLineColor(kRed)
 #pmiss_z_protons_simc_cut_all.Draw("E1")
 P_kin_secondary_pmiss_z_protons_dummysub_data_cut_all.SetLineColor(kBlue)
-P_kin_secondary_pmiss_z_protons_dummysub_data_cut_all.Draw("same, E1")
+P_kin_secondary_pmiss_z_protons_dummysub_data_cut_all.Draw("E1")
 pmiss_z_protons_simc_cut_all.SetLineColor(kRed)
-pmiss_z_protons_simc_cut_all.Draw("E1")
+pmiss_z_protons_simc_cut_all.Draw("same, E1")
 pmiss_z_legend = TLegend(0.58, 0.7, 0.9, 0.9)
 pmiss_z_legend.SetBorderSize(1)
 pmiss_z_legend.SetFillColor(0)
@@ -1218,9 +1218,9 @@ P_kin_secondary_emiss_protons_dummysub_data_cut_all.GetXaxis().SetRangeUser(-0.2
 #emiss_protons_simc_cut_all.SetLineColor(kRed)
 #emiss_protons_simc_cut_all.Draw("E1")
 P_kin_secondary_emiss_protons_dummysub_data_cut_all.SetLineColor(kBlue)
-P_kin_secondary_emiss_protons_dummysub_data_cut_all.Draw("same, E1")
+P_kin_secondary_emiss_protons_dummysub_data_cut_all.Draw("E1")
 emiss_protons_simc_cut_all.SetLineColor(kRed)
-emiss_protons_simc_cut_all.Draw("E1")
+emiss_protons_simc_cut_all.Draw("same, E1")
 emiss_legend = TLegend(0.58, 0.7, 0.9, 0.9)
 emiss_legend.SetBorderSize(1)
 emiss_legend.SetFillColor(0)
@@ -1247,9 +1247,9 @@ P_kin_secondary_W_protons_dummysub_data_cut_all.GetXaxis().SetRangeUser(0.6, 1.4
 #W_protons_simc_cut_all.SetLineColor(kRed)
 #W_protons_simc_cut_all.Draw("E1")
 P_kin_secondary_W_protons_dummysub_data_cut_all.SetLineColor(kBlue)
-P_kin_secondary_W_protons_dummysub_data_cut_all.Draw("same, E1")
+P_kin_secondary_W_protons_dummysub_data_cut_all.Draw("E1")
 W_protons_simc_cut_all.SetLineColor(kRed)
-W_protons_simc_cut_all.Draw("E1")
+W_protons_simc_cut_all.Draw("same, E1")
 W_legend = TLegend(0.58, 0.7, 0.9, 0.9)
 W_legend.SetBorderSize(1)
 W_legend.SetFillColor(0)
@@ -1275,11 +1275,11 @@ ROOT.gStyle.SetOptStat(0)
 c1_delta = TCanvas("c1_delta", "Delta and Target Distributions", 100, 0, 1400, 600)
 c1_delta.Divide(3,2)
 #Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 10.549355, -5.878, 21.655, 5.530, 23.110
-#Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 5.984804, -3.271, 29.170, 3.493, 27.495
+Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 5.984804, -3.271, 29.170, 3.493, 27.495
 #Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 6.394701, -4.752, 18.595, 2.412, 37.970
 #Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 6.394701, -4.391, 21.095, 2.792, 34.475
 #Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 6.394701, -3.014, 33.350, 4.220, 23.115
-Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 7.937000, -3.283, 33.640, 5.512, 19.270
+#Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 7.937000, -3.283, 33.640, 5.512, 19.270
 #Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 8.478619, -5.587, 19.560, 3.731, 30.020
 #Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 9.172705, -3.738, 31.645, 6.265, 18.125
 #Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 9.878908, -5.366, 23.050, 5.422, 23.050
@@ -1290,11 +1290,18 @@ c1_delta_text_lines = [
     TText(0.5, 0.7, 'HMS_p = ' + str(HMS_p)),
     TText(0.5, 0.6, 'HMS_theta = ' + str(HMS_theta)),
     TText(0.5, 0.5, 'SHMS_p = ' + str(SHMS_p)),
-    TText(0.5, 0.4, 'SHMS_theta = ' + str(SHMS_theta))
+    TText(0.5, 0.4, 'SHMS_theta = ' + str(SHMS_theta)),
+    TText(0.5, 0.3, "Red = SIMC"),
+    TText(0.5, 0.2, "Blue = DATA")
 ]
 for c1_delta_text in c1_delta_text_lines:
     c1_delta_text.SetTextSize(0.07)
     c1_delta_text.SetTextAlign(22)
+    c1_delta_text.SetTextColor(ROOT.kGreen + 4)
+    if c1_delta_text.GetTitle() == "Red = SIMC":
+       c1_delta_text.SetTextColor(ROOT.kRed)  # Setting text color to red
+    if c1_delta_text.GetTitle() == "Blue = DATA":
+       c1_delta_text.SetTextColor(ROOT.kBlue)  # Setting text color to blue
     c1_delta_text.Draw()
 c1_delta.cd(2)
 #H_hsdelta_protons_simc_cut_all.GetXaxis().SetRangeUser(-15, 15)
