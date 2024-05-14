@@ -28,6 +28,7 @@ from uncertainties import ufloat
 import sys, math, os, subprocess
 import array
 import csv
+import math
 from ROOT import TCanvas, TPaveLabel, TColor, TGaxis, TH1F, TH2F, TPad, TStyle, gStyle, gPad, TLegend, TGaxis, TLine, TMath, TLatex, TPaveText, TArc, TGraphPolar, TText
 from ROOT import kBlack, kCyan, kRed, kGreen, kMagenta, kBlue
 from functools import reduce
@@ -64,9 +65,15 @@ E10p549_HMS_Pe = 5.878
 E10p549_SHMS_Pp = 5.530
 E10p549_y = (E10p549_Pmy_simc - E10p549_Pmy_data)/E10p549_SHMS_Pp
 E10p549_x = (E10p549_HMS_Pe/E10p549_SHMS_Pp)
+E10p549_yerr = math.sqrt((E10p549_Pmy_simc.std_dev / E10p549_SHMS_Pp)**2 + (E10p549_Pmy_data.std_dev / E10p549_SHMS_Pp)**2)
+#E10p549_yerr = math.sqrt(HMSphi_err**2 + ((E10p549_SHMS_Pp / E10p549_HMS_Pe) * SHMSphi_err)**2 + 0.15**2)
+
+
+
 #E10p549_x = "{:.5f}".format(E10p549_xx)
 print('\nE10p549_y =', E10p549_y, '\n')
 print('E10p549_x =', E10p549_x, '\n')
+print('E10p549_x =', E10p549_yerr, '\n')
 print("="*40)
 
 E5p986_Pmy_simc = ufloat(0.00007493, 0.00003149)

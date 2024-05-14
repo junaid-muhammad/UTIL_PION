@@ -32,7 +32,7 @@ DUMMY_Suffix=Analysed_Dummy_Data
 SIMC_Suffix=Heep_Coin_SIMC
 DATA_RUN_LIST=HeePCoin_${BEAM_ENERGY}
 DUMMY_RUN_LIST=HeePCoin_${BEAM_ENERGY}_Dummy
-CSV_FILE=PionLT_HeeP_coin_HeePCoin_efficiency_data_2024_04_08
+CSV_FILE=PionLT_HeeP_coin_HeePCoin_efficiency_data_2024_05_14
 
 # Runs script in the ltsep python package that grabs current path enviroment
 if [[ ${HOSTNAME} = *"cdaq"* ]]; then
