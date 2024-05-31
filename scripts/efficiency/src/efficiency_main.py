@@ -56,7 +56,7 @@ out_f = UTILPATH+"/scripts/efficiency/OUTPUTS/%s_%s_efficiency_data_%s.csv"  % (
 
 ################################################################################################################################################
 
-import efficiency_hgcer
+#import efficiency_hgcer
 import efficiency_report
 
 DEBUG=True
@@ -76,7 +76,7 @@ for d in (hgcerDict, reportDict):
     data.update(d)
 
 eff_data = {i : data[i] for i in sorted(data.keys())}
-
+#out_data = pd.DataFrame()
 # Convert merged dictionary to a pandas dataframe then sort it
 table  = pd.DataFrame([eff_data], columns=eff_data.keys())
 table = table.reindex(sorted(table.columns), axis=1)
@@ -92,8 +92,9 @@ if file_exists:
     # Checks if run number is alread in csv and replaces it if it is there
     run_index = out_data.index[out_data["Run_Number"] == int(runNum)].tolist()
     out_data.drop(run_index, inplace=True)
-    out_data = out_data.append(table,ignore_index=True)
-    #print("Output efficiency values\n",out_data)
+#    out_data = out_data.append(table,ignore_index=True)  # ---- For new python version added next line
+    out_data = pd.concat([out_data, table], ignore_index=True)
+#print("Output efficiency values\n",out_data)
     out_data.to_csv(out_f, index = False, header=True, mode='w+',)
 else:
     table.to_csv(out_f, index = False, header=True, mode='a',)            

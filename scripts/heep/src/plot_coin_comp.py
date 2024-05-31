@@ -115,7 +115,7 @@ total_dummy_effective_charge = 0
 
 # Print charge values for each run
 for index, row in filtered_data_df.iterrows():
-    data_charge = row['BCM1_Charge']  # Assuming 'BCM1_Charge' is a column in your CSV
+    data_charge = row['BCM2_Charge']  # Assuming 'BCM2_Charge' is a column in your CSV
     data_hms_tracking_efficiency = row['HMS_Elec_SING_TRACK_EFF']  # Assuming 'HMS Tracking_Efficiency' is a column in your CSV
     data_shms_tracking_efficiency = row['SHMS_Prot_SING_TRACK_EFF']  # Assuming 'SHMS Tracking_Efficiency' is a column in your CSV
     data_product = data_charge * data_hms_tracking_efficiency * data_shms_tracking_efficiency
@@ -125,7 +125,7 @@ for index, row in filtered_data_df.iterrows():
 print("-"*40)
 
 for index, row in filtered_dummy_df.iterrows():
-    dummy_charge = row['BCM1_Charge']  # Assuming 'BCM1_Charge' is a column in your CSV
+    dummy_charge = row['BCM2_Charge']  # Assuming 'BCM2_Charge' is a column in your CSV
     dummy_hms_tracking_efficiency = row['HMS_Elec_SING_TRACK_EFF']  # Assuming 'HMS Efficiency' is a column in your CSV
     dummy_shms_tracking_efficiency = row['SHMS_Prot_SING_TRACK_EFF']  # Assuming 'SHMS Efficiency' is a column in your CSV
     dummy_product = dummy_charge * dummy_hms_tracking_efficiency * dummy_shms_tracking_efficiency
@@ -135,8 +135,8 @@ for index, row in filtered_dummy_df.iterrows():
 print("-"*40)
 
 # Optionally, calculate and print the total charge
-#data_charge = filtered_data_df['BCM1_Charge'].sum()
-#dummy_charge = filtered_dummy_df['BCM1_Charge'].sum()
+#data_charge = filtered_data_df['BCM2_Charge'].sum()
+#dummy_charge = filtered_dummy_df['BCM2_Charge'].sum()
 
 #print ('\nBeam Energy = ',BEAM_ENERGY)
 print('\nTotal effective charge for the data run list: ',total_data_effective_charge)
@@ -1083,15 +1083,15 @@ def fit_gaussian(hist, x_min, x_max, dtype):
 ROOT.gStyle.SetOptStat(0)
 c1_fit = TCanvas("c1_fit", "Missing Mass and Momentum Distributions", 100, 0, 1400,600)
 c1_fit.Divide(3,2)
-#Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 10.549355, -5.878, 21.655, 5.530, 23.110
+#Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 10.546755, -5.878, 21.655, 5.530, 23.110
 #Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 5.984804, -3.271, 29.170, 3.493, 27.495
 #Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 6.394701, -4.752, 18.595, 2.412, 37.970
 #Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 6.394701, -4.391, 21.095, 2.792, 34.475
 #Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 6.394701, -3.014, 33.350, 4.220, 23.115
-#Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 7.937000, -3.283, 33.640, 5.512, 19.270
+#Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 7.937573, -3.283, 33.640, 5.512, 19.270
 #Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 8.478619, -5.587, 19.560, 3.731, 30.020
-#Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 9.172705, -3.738, 31.645, 6.265, 18.125
-Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 9.878908, -5.366, 23.050, 5.422, 23.050
+#Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 9.171305, -3.738, 31.645, 6.265, 18.125
+Beam_Energy_S, HMS_p, HMS_theta, SHMS_p, SHMS_theta  = 9.876908, -5.366, 23.050, 5.422, 23.050
 
 c1_fit.cd(1)
 c1_fit_text_lines = [

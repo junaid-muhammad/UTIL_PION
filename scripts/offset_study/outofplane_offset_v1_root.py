@@ -196,90 +196,79 @@ print("="*40)
 
 #################################################################################################################################################
 
+# Start batch mode
+ROOT.gROOT.SetBatch(ROOT.kTRUE)
+
 # Create lists for x and y values along with their uncertainties
 x_values = [E10p549_x, E5p986_x, E6p395s1_x, E6p395s2_x, E6p395s3_x, E7p937_x, E8p479_x, E9p177_x, E9p876_x]
 y_values = [E10p549_y, E5p986_y, E6p395s1_y, E6p395s2_y, E6p395s3_y, E7p937_y, E8p479_y, E9p177_y, E9p876_y]
-yerr_values = [E10p549_yerr, E5p986_yerr, E6p395s1_yerr, E6p395s2_yerr, E6p395s3_yerr, E7p937_yerr, E8p479_yerr, E9p177_yerr, E9p876_yerr]
+y_errors = [E10p549_yerr, E5p986_yerr, E6p395s1_yerr, E6p395s2_yerr, E6p395s3_yerr, E7p937_yerr, E8p479_yerr, E9p177_yerr, E9p876_yerr]
 
-# Extract nominal values and uncertainties for plotting
-x_nominals = [float(x) for x in x_values]
-y_nominals = [float(y) for y in y_values]
-y_errors = [float(yerr) for yerr in yerr_values]
+# Convert values to floats
+x_min = float(min(x_values))
+x_max = float(max(x_values))
 
-#################################################################################################################################################
+# Create a TGraphErrors object
+graph = ROOT.TGraphErrors(len(x_values))
 
-# Define the model function (in this case, a linear function)
-def linear_model(x, a, b):
-    return a * x + b
-# Convert the x values to numpy array for numerical operations
-x_nominals_array = np.array(x_nominals)
-y_nominals_array = np.array(y_nominals)
-y_errors_array = np.array(y_errors)
+# Fill the TGraphErrors with x, y values, and errors
+for i in range(len(x_values)):
+    graph.SetPoint(i, float(x_values[i]), float(y_values[i]))  # Ensure float conversion here
+    graph.SetPointError(i, 0, float(y_errors[i]))  # Ensure float conversion here as well
 
-# Perform the error-weighted fit using curve_fit
-popt, pcov = curve_fit(linear_model, x_nominals_array, y_nominals_array, sigma=y_errors_array, absolute_sigma=True)
+# Define a fitting function
+fit_func = ROOT.TF1("fit_func", "[0]*x + [1]", x_min, x_max)
 
-# Extract the optimized slope and intercept
-slope = ufloat(popt[0], np.sqrt(pcov[0, 0]))
-intercept = ufloat(popt[1], np.sqrt(pcov[1, 1]))
+# Set initial parameter values if needed
+fit_func.SetParameters(1.0, 0.0)
 
-# Print the extracted slope and intercept values
-print('\nSlope (with uncertainty):', slope,'\n')
-print('\nIntercept (with uncertainty):', intercept, '\n')
+# Perform the fit
+result = graph.Fit(fit_func, "S")  # "S" option includes error on Y values
 
-# Generate points for the fitted line
-x_fit = np.linspace(min(x_nominals_array), max(x_nominals_array), 100)
-y_fit = linear_model(x_fit, *popt)
+# Print fit result
+result.Print()
 
-#This code snippet calculates the residuals by subtracting the fitted values from the observed values. Then, it calculates the chi-square value by summing the squared residuals divided by the squared uncertainties. This gives you a measure of how well the model fits the data, with lower values indicating a better fit.
+# Access fit parameters
+fit_parameters = result.GetParams()
+fit_errors = result.GetErrors()
+print("Fit parameters:", fit_parameters)
 
-residuals = y_nominals_array - linear_model(x_nominals_array, *popt)
+# Create a canvas
+canvas = ROOT.TCanvas("canvas", "Graph with Error Bars", 1000, 600)
 
-# Calculate the chi-square value
-chi_square = np.sum((residuals / y_errors_array)**2)
+# Set titles and axis labels
+graph.SetTitle("Out of Plane Offset")
+graph.GetXaxis().SetTitle("$(P_p/P_{e^\prime})$")
+graph.GetYaxis().SetTitle("$(PMY_\mathrm{SIMC} - PMY_\mathrm{DATA})/P_{e^\prime}$")
 
-# Degrees of freedom is the difference between the number of data points and the number of parameters in the model.
-degrees_of_freedom = len(x_nominals_array) - len(popt)
+# Set different marker styles and colors for data points
+graph.SetMarkerStyle(20)  # Circle
+graph.SetMarkerColor(ROOT.kBlue)  # Blue
+graph.GetXaxis().SetRangeUser(0.0,2.25)
+graph.GetYaxis().SetRangeUser(0.001,0.003)
 
-# Reduced chi-square value 
-reduced_chi_square = chi_square / degrees_of_freedom
+# Draw the graph
+graph.Draw("AP")
+fit_func.Draw("same")
 
-# Print the chi-square value
-print('Chi-square value:', chi_square,'\n')
-print('Reduced chi-square value:', reduced_chi_square, '\n')
-print("="*40)
+# Add fit results to the plot
+latex = ROOT.TLatex()
+latex.SetTextSize(0.03)
 
-##################################################################################################################################################
+# Write slope and intercept values
+slope = fit_parameters[0]
+intercept = fit_parameters[1]
+slope_error = fit_errors[0]
+intercept_error = fit_errors[1]
 
-# Output PDF File Name
-print("Running as %s on %s, hallc_replay_lt path assumed as %s" % (USER, HOST, REPLAYPATH))
+text_slope = "Slope: {:.2f}".format(slope*1000)
+text_intercept = "Intercept: {:.2f}".format(intercept*1000)
 
-plt.figure(figsize=(12,8))
+latex.DrawLatexNDC(0.2, 0.85, text_slope)
+latex.DrawLatexNDC(0.2, 0.80, text_intercept)
 
-plt.subplot(111)
-#plt.grid(zorder=1)
-plt.xlim(0.0,2.25)
-plt.ylim(0.001,0.003)
-plt.errorbar(x_nominals, y_nominals, yerr=y_errors, fmt='o', markersize=8, color='black', linestyle='None', capsize=4, zorder=3, label='Data with uncertainties')
-plt.scatter(x_nominals, y_nominals, color='blue', zorder=4, label='Data points')
-plt.plot(x_fit, y_fit, color='red', label='Error-weighted Fit: y = (' + "{:.5f}".format(slope.nominal_value) + ')*x + (' + "{:.5f}".format(intercept.nominal_value) + ')')
-plt.legend()
-# Format the slope and intercept values
-slope_str = '{:.2f} mr'.format(slope.nominal_value*1000)
-intercept_str = '+{:.2f} mr'.format(intercept.nominal_value*1000)
-# Use the formatted strings in the LaTeX expression
-plt.text(1.75, 0.00263, r'$d\phi_{\mathrm{SHMS}}$ = ' + slope_str, fontsize=16, color='red')
-plt.text(1.75, 0.00250, r'$d\phi_{\mathrm{HMS}}$ = ' + intercept_str, fontsize=16, color='green')
-plt.ylabel(r'$(PMY_\mathrm{SIMC} - PMY_\mathrm{DATA})/P_{e^\prime}$', fontsize=20)
-plt.xlabel(r'$(P_p/P_{e^\prime})$', fontsize=20)
-#plt.locator_params(axis='x', nbins=20) ### set number of bins for x axis only
-plt.tick_params(axis='x', labelsize=14)  # Increase x-axis tick size
-plt.tick_params(axis='y', labelsize=14)  # Increase y-axis tick size
-plt.xticks(rotation=90)
-plt.title('Out-of-Plane Offset', fontsize=18)
-
-plt.tight_layout(rect=[0,0.03,1,0.95])
-plt.savefig(UTILPATH+'/scripts/offset_study/Outofplane_offset_v1.png')
+# Save the graph as PNG
+canvas.SaveAs("Out_of_plane_offset_v1_N.png")
 
 ############################################################################################################################################
 
