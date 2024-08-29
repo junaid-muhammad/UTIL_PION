@@ -15,7 +15,8 @@
 if [[ ${HOSTNAME} = *"cdaq"* ]]; then
     PATHFILE_INFO=`python3 /home/cdaq/pionLT-2021/hallc_replay_lt/UTIL_PION/bin/python/ltsep/scripts/getPathDict.py $PWD` # The output of this python script is just a comma separated string
 elif [[ "${HOSTNAME}" = *"farm"* ]]; then
-    PATHFILE_INFO=`python3 /u/home/${USER}/.local/lib/python3.4/site-packages/ltsep/scripts/getPathDict.py $PWD` # The output of this python script is just a comma separated string
+#    PATHFILE_INFO=`python3 /u/home/${USER}/.local/lib/python3.4/site-packages/ltsep/scripts/getPathDict.py $PWD` # The output of this python script is just a comma separated string
+    PATHFILE_INFO=`python3 /u/group/c-pionlt/USERS/junaid/replay_lt_env/lib/python3.9/site-packages/ltsep/scripts/getPathDict.py $PWD` # The output of this python script is just a comma separated string
 fi
 
 # Split the string we get to individual variables, easier for printing and use later
@@ -109,11 +110,12 @@ else
         exit 1
     elif [[ $RUNTYPE = "Prod" ]]; then
         ROOTPREFIX=PionLT_coin_production
-        python3 plot/plot_prod_efficiency.py ${ROOTPREFIX} ${RUNTYPE} ${TIMESTMP}
-        cd "${SCRIPTPATH}/efficiency/OUTPUTS/plots"
-        convert *.png "${ROOTPREFIX}_${RUNTYPE}_${TIMESTMP}.pdf"
+#        python3 plot/plot_prod_efficiency.py ${ROOTPREFIX} ${RUNTYPE} ${TIMESTMP}
+        python3 plot/plot_prod_efficiency_NIM.py ${ROOTPREFIX} ${RUNTYPE} ${TIMESTMP}
+       cd "${SCRIPTPATH}/efficiency/OUTPUTS/plots"
+#        convert *.png "${ROOTPREFIX}_${RUNTYPE}_${TIMESTMP}.pdf"
 #      evince "${RUNTYPE}_${TIMESTMP}.pdf"
-        mv *.png png/
+#        mv *.png png/
 #      rm -f *.png
         exit 1
     elif [[ $RUNTYPE = "pTRIG6" ]]; then
