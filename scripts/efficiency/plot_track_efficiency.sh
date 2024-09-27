@@ -89,7 +89,7 @@ if [[ $s_flag = "true" ]]; then
 
 else
     RUNTYPE=$1
-    TIMESTMP="2024_03_02"
+    TIMESTMP="2024_09_05"
     if [[ $RUNTYPE = "HeePCoin" ]]; then
         ROOTPREFIX=PionLT_HeeP_coin
         python3 plot/plot_heepcoin_efficiency.py ${ROOTPREFIX} ${RUNTYPE} ${TIMESTMP}
@@ -109,9 +109,9 @@ else
 #      rm -f *.png
         exit 1
     elif [[ $RUNTYPE = "Prod" ]]; then
-        ROOTPREFIX=PionLT_coin_production
+        ROOTPREFIX=coin_production
 #        python3 plot/plot_prod_efficiency.py ${ROOTPREFIX} ${RUNTYPE} ${TIMESTMP}
-        python3 plot/plot_prod_efficiency_NIM.py ${ROOTPREFIX} ${RUNTYPE} ${TIMESTMP}
+        python3 plot/plot_efficiency.py ${ROOTPREFIX} ${RUNTYPE} ${TIMESTMP}
        cd "${SCRIPTPATH}/efficiency/OUTPUTS/plots"
 #        convert *.png "${ROOTPREFIX}_${RUNTYPE}_${TIMESTMP}.pdf"
 #      evince "${RUNTYPE}_${TIMESTMP}.pdf"

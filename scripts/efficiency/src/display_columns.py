@@ -51,7 +51,7 @@ OUTPATH=lt.OUTPATH
 
 def display_columns(csv_file, column1, column2):
 
-    csv_file = UTILPATH+"/scripts/efficiency/OUTPUTS/%s_%s_efficiency_data_%s.csv"  % (ROOTPrefix.replace("replay_",""),runType,timestmp)
+    csv_file = UTILPATH+"/efficiencies/%s_%s_efficiency_data_%s.csv"  % (ROOTPrefix.replace("replay_",""),runType,timestmp)
 
     with open(csv_file, 'r', newline='') as file:
         reader = csv.DictReader(file)
@@ -60,8 +60,8 @@ def display_columns(csv_file, column1, column2):
         print("{} --- {}".format(column1, column2))
         # Iterate over rows and print values
         for row in reader:
-#            eff = 0.9890
-#            if float(row[column2]) < eff:
+#            value = 0.99
+#            if float(row[column2]) < value:
 #               print(row[column1], " ------ " ,row[column2])
 	
              print(row[column1], " ------ " ,row[column2])

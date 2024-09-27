@@ -89,9 +89,9 @@ if [[ $s_flag = "true" ]]; then
 elif [[ $c_flag = "true" ]]; then
     RunType=$3
     if [[ $RunType = "HeePCoin" ]]; then
-        ROOTPREFIX=PionLT_replay_HeeP_coin
+         ROOTPREFIX=PionLT_replay_HeeP_coin
 #        HGCERPREFIX=${ANATYPE}_coin_replay_production
-        inputFile="${REPLAYPATH}/UTIL_BATCH/InputRunLists/eff_runlist/${RunList}"
+         inputFile="${REPLAYPATH}/UTIL_BATCH/InputRunLists/eff_runlist/${RunList}"
     elif [[ $RunType = "LumiCoin" ]]; then
         ROOTPREFIX=PionLT_replay_Lumi_coin
 #       HGCERPREFIX=${ANATYPE}_${SPEC}_replay_production
@@ -103,6 +103,7 @@ elif [[ $c_flag = "true" ]]; then
     elif [[ $RunType = "Prod" ]]; then
         ROOTPREFIX=PionLT_replay_coin_production
 #       HGCERPREFIX=${ANATYPE}_coin_replay_production
+#        ROOTPREFIX=replay_coin_production
         inputFile="${REPLAYPATH}/UTIL_BATCH/InputRunLists/eff_runlist/${RunList}"
     else
         echo "Please Provide RUNTYPE"

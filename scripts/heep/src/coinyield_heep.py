@@ -8,17 +8,8 @@
 #
 # Author:  Muhammad Junaid <mjo147@uregina.ca>
 #
-# Copyright (c) junaid & trottar
+# Copyright (c) junaid
 #
-
-# 15/01/21 - Stephen Kay, University of Regina
-# 21/06/21 - Edited By - Muhammad Junaid, University of Regina, Canada
-
-# Python version of the pion analysis script. Now utilises uproot to select event of each type and writes them to a root file
-# Intention is to apply PID/selection cutting here and plot in a separate script
-# Python should allow for easier reading of databases storing timing offsets e.t.c.
-# 27/04/21 - Updated to use new hcana variables, old determinations removed
-
 ###################################################################################################################################################
 
 # Import relevant packages
@@ -69,7 +60,7 @@ cut_f = '/DB/CUTS/run_type/coin_heep.cuts'
 
 # defining Cuts
 #cuts = ["coin_ep_cut_all_RF", "coin_ep_cut_prompt_RF", "coin_ep_cut_rand_RF"]
-cuts = ["coin_ep_cut_all_RF", "coin_ep_cut_prompt_RF"]
+cuts = ["coin_ep_cut_all_noRF", "coin_ep_cut_prompt_noRF"]
 lt=Root(os.path.realpath(__file__),"HeePCoin",ROOTPrefix,runNum,MaxEvent,cut_f,cuts)
 
 OUTPATH=lt.OUTPATH
@@ -98,9 +89,9 @@ def coin_protons():
 #    Cut_COIN_Protons_rand_tmp = []
 
     for arr in Cut_COIN_Protons_tmp:
-        Cut_COIN_Protons_all_tmp.append(c.add_cut(arr, "coin_ep_cut_all_RF"))
-        Cut_COIN_Protons_prompt_tmp.append(c.add_cut(arr, "coin_ep_cut_prompt_RF"))
-#        Cut_COIN_Protons_rand_tmp.append(c.add_cut(arr, "coin_ep_cut_rand_RF"))
+        Cut_COIN_Protons_all_tmp.append(c.add_cut(arr, "coin_ep_cut_all_noRF"))
+        Cut_COIN_Protons_prompt_tmp.append(c.add_cut(arr, "coin_ep_cut_prompt_noRF"))
+#        Cut_COIN_Protons_rand_tmp.append(c.add_cut(arr, "coin_ep_cut_rand_noRF"))
 
     Cut_COIN_Protons_all = [(tree["H_gtr_beta"], tree["H_gtr_xp"], tree["H_gtr_yp"], tree["H_gtr_dp"], tree["H_gtr_p"], tree["H_dc_x_fp"], tree["H_dc_y_fp"], tree["H_dc_xp_fp"], tree["H_dc_yp_fp"], tree["H_hod_goodscinhit"], tree["H_hod_goodstarttime"], tree["H_cal_etotnorm"], tree["H_cal_etottracknorm"], tree["H_cer_npeSum"], tree["CTime_epCoinTime_ROC1"], tree["P_gtr_beta"], tree["P_gtr_xp"], tree["P_gtr_yp"], tree["P_gtr_p"], tree["P_gtr_dp"], tree["P_dc_x_fp"], tree["P_dc_y_fp"], tree["P_dc_xp_fp"], tree["P_dc_yp_fp"], tree["P_hod_goodscinhit"], tree["P_hod_goodstarttime"], tree["P_cal_etotnorm"], tree["P_cal_etottracknorm"], tree["P_aero_npeSum"], tree["P_aero_xAtAero"], tree["P_aero_yAtAero"], tree["P_hgcer_npeSum"], tree["P_hgcer_xAtCer"], tree["P_hgcer_yAtCer"], tree["P_ngcer_npeSum"], tree["P_ngcer_xAtCer"], tree["P_ngcer_yAtCer"], tree["MMp"], tree["H_RF_Dist"], tree["P_RF_Dist"], tree["Q2"], tree["W"], tree["epsilon"], tree["ph_q"], tree["MandelT"], tree["pmiss"], tree["pmiss_x"], tree["pmiss_y"], tree["pmiss_z"], tree["emiss"], tree["Erecoil"], tree["Mrecoil"]) for (tree["H_gtr_beta"], tree["H_gtr_xp"], tree["H_gtr_yp"], tree["H_gtr_dp"], tree["H_gtr_p"], tree["H_dc_x_fp"], tree["H_dc_y_fp"], tree["H_dc_xp_fp"], tree["H_dc_yp_fp"], tree["H_hod_goodscinhit"], tree["H_hod_goodstarttime"], tree["H_cal_etotnorm"], tree["H_cal_etottracknorm"], tree["H_cer_npeSum"], tree["CTime_epCoinTime_ROC1"], tree["P_gtr_beta"], tree["P_gtr_xp"], tree["P_gtr_yp"], tree["P_gtr_p"], tree["P_gtr_dp"], tree["P_dc_x_fp"], tree["P_dc_y_fp"], tree["P_dc_xp_fp"], tree["P_dc_yp_fp"], tree["P_hod_goodscinhit"], tree["P_hod_goodstarttime"], tree["P_cal_etotnorm"], tree["P_cal_etottracknorm"], tree["P_aero_npeSum"], tree["P_aero_xAtAero"], tree["P_aero_yAtAero"], tree["P_hgcer_npeSum"], tree["P_hgcer_xAtCer"], tree["P_hgcer_yAtCer"], tree["P_ngcer_npeSum"], tree["P_ngcer_xAtCer"], tree["P_ngcer_yAtCer"], tree["MMp"], tree["H_RF_Dist"], tree["P_RF_Dist"], tree["Q2"], tree["W"], tree["epsilon"], tree["ph_q"], tree["MandelT"], tree["pmiss"], tree["pmiss_x"], tree["pmiss_y"], tree["pmiss_z"], tree["emiss"], tree["Erecoil"], tree["Mrecoil"]) in zip(*Cut_COIN_Protons_all_tmp)
         ]

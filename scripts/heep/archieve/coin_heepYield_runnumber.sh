@@ -37,7 +37,8 @@ fi
 if [[ ${HOSTNAME} = *"cdaq"* ]]; then
     PATHFILE_INFO=`python3 /home/cdaq/pionLT-2021/hallc_replay_lt/UTIL_PION/bin/python/ltsep/scripts/getPathDict.py $PWD` # The output of this python script is just a comma separated string
 elif [[ "${HOSTNAME}" = *"farm"* ]]; then
-    PATHFILE_INFO=`python3 /u/home/${USER}/.local/lib/python3.4/site-packages/ltsep/scripts/getPathDict.py $PWD` # The output of this python script is just a comma separated string
+#    PATHFILE_INFO=`python3 /u/home/${USER}/.local/lib/python3.4/site-packages/ltsep/scripts/getPathDict.py $PWD` # The output of this python script is just a comma separated string
+    PATHFILE_INFO=`python3 /u/group/c-pionlt/USERS/junaid/replay_lt_env/lib/python3.9/site-packages/ltsep/scripts/getPathDict.py $PWD` # The output of this python script is just a comma separated string
 elif [[ "${HOSTNAME}" = *"qcd"* ]]; then
     PATHFILE_INFO=`python3 /u/home/${USER}/.local/lib/python3.4/site-packages/ltsep/scripts/getPathDict.py $PWD` # The output of this python script is just a comma separated string
 fi
@@ -132,5 +133,5 @@ elif [ ! -f  "${UTILPATH}/OUTPUT/Analysis/HeeP/${RUNNUMBER}_${MAXEVENTS}_Output_
 	python3 ${UTILPATH}/scripts/heep/src/plot_coin.py Analysed_Data ${RUNNUMBER} ${MAXEVENTS} 
 else echo "HeeP coin output plots file already found in ${UTILPATH}/OUTPUT/Analysis/HeeP/ - Skipped python plotting script step"
 fi
-evince "${UTILPATH}/OUTPUT/Analysis/HeeP/${RUNNUMBER}_${MAXEVENTS}_heep_Proton_Analysis_Distributions.pdf" &
+#evince "${UTILPATH}/OUTPUT/Analysis/HeeP/${RUNNUMBER}_${MAXEVENTS}_heep_Proton_Analysis_Distributions.pdf" &
 exit 0

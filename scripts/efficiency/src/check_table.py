@@ -49,7 +49,8 @@ OUTPATH=lt.OUTPATH
 
 def getTable():
     # Output for luminosity table
-    inp_f = UTILPATH+"/scripts/efficiency/OUTPUTS/%s_%s_efficiency_data_%s.csv"  % (ROOTPrefix.replace("replay_",""),runType,timestmp)
+#    inp_f = UTILPATH+"/scripts/efficiency/OUTPUTS/%s_%s_efficiency_data_%s.csv"  % (ROOTPrefix.replace("replay_",""),runType,timestmp)
+    inp_f = UTILPATH+"/efficiencies/%s_%s_efficiency_data_%s.csv"  % (ROOTPrefix.replace("replay_",""),runType,timestmp)
 
     # Converts csv data to dataframe
     try:

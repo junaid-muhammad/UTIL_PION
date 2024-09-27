@@ -62,7 +62,8 @@ fi
 if [[ ${HOSTNAME} = *"cdaq"* ]]; then
     PATHFILE_INFO=`python3 /home/cdaq/pionLT-2021/hallc_replay_lt/UTIL_PION/bin/python/ltsep/scripts/getPathDict.py $PWD` # The output of this python script is just a comma separated string
 elif [[ "${HOSTNAME}" = *"farm"* ]]; then
-    PATHFILE_INFO=`python3 /u/home/${USER}/.local/lib/python3.4/site-packages/ltsep/scripts/getPathDict.py $PWD` # The output of this python script is just a comma separated string
+#    PATHFILE_INFO=`python3 /u/home/${USER}/.local/lib/python3.4/site-packages/ltsep/scripts/getPathDict.py $PWD` # The output of this python script is just a comma separated string
+    PATHFILE_INFO=`python3 /u/group/c-pionlt/USERS/junaid/replay_lt_env/lib/python3.9/site-packages/ltsep/scripts/getPathDict.py $PWD` # The output of this python script is just a comma separated string
 elif [[ "${HOSTNAME}" = *"qcd"* ]]; then
     PATHFILE_INFO=`python3 /u/home/${USER}/.local/lib/python3.4/site-packages/ltsep/scripts/getPathDict.py $PWD` # The output of this python script is just a comma separated string
 fi
@@ -118,7 +119,7 @@ if [[ $c_flag = "true" ]]; then
 ##################################################################################################################################
 
 # Section for HeeP physics ploting script
-ROOTPREFIX_PLOT=Analysed_Data
+#ROOTPREFIX_PLOT=Analysed_Data
 
 elif [[ $p_flag = "true" ]]; then
     while true; do
@@ -133,7 +134,7 @@ elif [[ $p_flag = "true" ]]; then
                     echo "Run number read from file: $line"
                     echo ""
                     cd "${UTILPATH}/scripts/heep/src/"
-                    python3 plot_coin.py ${ROOTPREFIX_PLOT} $line ${MAXEVENTS}
+                    python3 plot_coin.py Analysed_Data $line ${MAXEVENTS}
                 done < "$inputFile"
                 )
                 break;;

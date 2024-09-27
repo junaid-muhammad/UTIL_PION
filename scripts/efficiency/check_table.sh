@@ -66,19 +66,19 @@ if [[ $l_flag = "true" ]]; then
     RUNNUM=$3
     COLUMN="List"
     if [[ $RUNTYPE = "HeePCoin" ]]; then
-	TIMESTMP="2024_02_08"
+	TIMESTMP="2024_09_17"
 	ROOTPREFIX=PionLT_HeeP_coin
     elif [[ $RUNTYPE = "LumiCoin" ]]; then
-        TIMESTMP="2024_02_08"
+        TIMESTMP="2024_09_17"
         ROOTPREFIX=PionLT_luminosity_coin
     elif [[ $RUNTYPE = "Prod" ]]; then
-        TIMESTMP="2024_02_08"
+        TIMESTMP="2024_09_17"
         ROOTPREFIX=PionLT_coin_production
     elif [[ $RUNTYPE = "pTRIG6" ]]; then
-        TIMESTMP="2024_02_08"
+        TIMESTMP="2024_09_17"
         ROOTPREFIX=PionLT_coin_production_pTRIG6
     else
-	TIMESTMP="2024_02_08"
+	TIMESTMP="2024_09_17"
 	ROOTPREFIX=PionLT_coin_production
     fi
     cd "${SCRIPTPATH}/efficiency/src/"
@@ -92,7 +92,7 @@ if [[ $s_flag = "true" ]]; then
     SPEC=$(echo "$spec" | tr '[:lower:]' '[:upper:]')
     RUNNUM=$4
     COLUMN="All"
-    TIMESTMP="2024_02_08"
+    TIMESTMP="2024_09_17"
     if [[ $RUNTYPE = "HeePSing" ]]; then
 	ROOTPREFIX=PionLT_${SPEC}_HeePSing
     elif [[ $RUNTYPE = "LumiSing" ]]; then
@@ -107,7 +107,7 @@ elif [[ $s_flag = "true" && $u_flag = "true" ]]; then
     SPEC=$(echo "$spec" | tr '[:lower:]' '[:upper:]')
     RUNNUM=$4
     COLUMN=$5
-    TIMESTMP="2024_02_08"
+    TIMESTMP="2024_09_17"
     if [[ $RUNTYPE = "HeePSing" ]]; then
         ROOTPREFIX=PionLT_${SPEC}_HeePSing
     elif [[ $RUNTYPE = "LumiSing" ]]; then
@@ -121,19 +121,19 @@ elif [[ $u_flag = "true" ]]; then
     RUNNUM=$3
     COLUMN=$4
     if [[ $RUNTYPE = "HeePCoin" ]]; then
-        TIMESTMP="2024_02_08"
+        TIMESTMP="2024_09_17"
         ROOTPREFIX=PionLT_HeeP_coin
     elif [[ $RUNTYPE = "LumiCoin" ]]; then
-        TIMESTMP="2024_02_08"
+        TIMESTMP="2024_09_17"
         ROOTPREFIX=PionLT_luminosity_coin
     elif [[ $RUNTYPE = "Prod" ]]; then
-        TIMESTMP="2024_02_08"
+        TIMESTMP="2024_09_17"
         ROOTPREFIX=PionLT_coin_production
     elif [[ $RUNTYPE = "pTRIG6" ]]; then
-        TIMESTMP="2024_02_08"
+        TIMESTMP="2024_09_17"
         ROOTPREFIX=PionLT_coin_production_pTRIG6
     else
-        TIMESTMP="2024_02_08"
+        TIMESTMP="2024_09_17"
         ROOTPREFIX=PionLT_coin_production
     fi    
 
@@ -142,19 +142,19 @@ else
     RUNNUM=$2
     COLUMN="All"
     if [[ $RUNTYPE = "HeePCoin" ]]; then
-        TIMESTMP="2024_02_08"
+        TIMESTMP="2024_09_17"
         ROOTPREFIX=PionLT_HeeP_coin
     elif [[ $RUNTYPE = "LumiCoin" ]]; then
-        TIMESTMP="2024_02_08"
+        TIMESTMP="2024_09_17"
         ROOTPREFIX=PionLT_luminosity_coin
     elif [[ $RUNTYPE = "Prod" ]]; then
-        TIMESTMP="2024_02_08"
+        TIMESTMP="2024_09_17"
         ROOTPREFIX=PionLT_coin_production
     elif [[ $RUNTYPE = "pTRIG6" ]]; then
-        TIMESTMP="2024_02_08"
+        TIMESTMP="2024_09_17"
         ROOTPREFIX=PionLT_coin_production_pTRIG6
     else
-        TIMESTMP="2024_02_08"
+        TIMESTMP="2024_09_17"
         ROOTPREFIX=PionLT_coin_production
     fi
 fi
