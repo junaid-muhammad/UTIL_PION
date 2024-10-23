@@ -80,17 +80,17 @@ Proton_Analysis_Distributions = "%s/%s_%s_HeePCoin_Proton_Analysis_Distributions
 
 # Input file location and variables taking
 rootFile_DATA = "%s/%s_%s_%s.root" % (OUTPATH, BEAM_ENERGY, MaxEvent, DATA_Suffix)
-rootFile_DUMMY = "%s/%s_%s_%s.root" % (OUTPATH, BEAM_ENERGY, MaxEvent, DUMMY_Suffix)
+#rootFile_DUMMY = "%s/%s_%s_%s.root" % (OUTPATH, BEAM_ENERGY, MaxEvent, DUMMY_Suffix)
 rootFile_SIMC = "%s/%s_%s.root" % (SIMCPATH, BEAM_ENERGY, SIMC_Suffix)
 data_run_list = "%s/%s" % (RUNLISTPATH, DATA_RUN_LIST)
-dummy_run_list = "%s/%s" % (RUNLISTPATH, DUMMY_RUN_LIST)
+#dummy_run_list = "%s/%s" % (RUNLISTPATH, DUMMY_RUN_LIST)
 csv_file = "%s/%s.csv" % (CSVPATH, CSV_FILE)
 ###############################################################################################################################################
 
 # Read CSV File and calculate total charge in mC
 # Input runlists and csv files
 data_run_list_file = (data_run_list)
-dummy_run_list_file = (dummy_run_list)
+#dummy_run_list_file = (dummy_run_list)
 csv_file_name = (csv_file)
 
 print ('\nBeam Energy = ',BEAM_ENERGY, '\n')
@@ -99,26 +99,26 @@ print("-"*40)
 # Read run numbers from the run list file
 with open(data_run_list_file, 'r') as run_list_file_1:
     data_runs = [line.strip() for line in run_list_file_1 if line.strip()]
-with open(dummy_run_list_file, 'r') as run_list_file_2:
-    dummy_runs = [line.strip() for line in run_list_file_2 if line.strip()]
+#with open(dummy_run_list_file, 'r') as run_list_file_2:
+#    dummy_runs = [line.strip() for line in run_list_file_2 if line.strip()]
 
 # Read CSV file using pandas
 df = pd.read_csv(csv_file_name)
 
 # Filter DataFrame to include only rows with run numbers in the run list
 filtered_data_df = df[df['Run_Number'].astype(str).str.replace('.0', '', regex=False).isin(data_runs)]
-filtered_dummy_df = df[df['Run_Number'].astype(str).str.replace('.0', '', regex=False).isin(dummy_runs)]
+#filtered_dummy_df = df[df['Run_Number'].astype(str).str.replace('.0', '', regex=False).isin(dummy_runs)]
 
 
 # Intializing Variables to calculate the product of efficiency and charge
 total_data_effective_charge = 0.0
-total_dummy_effective_charge = 0.0
+#total_dummy_effective_charge = 0.0
 total_data_effective_charge_sum = 0.0
-total_dummy_effective_charge_sum = 0.0
+#total_dummy_effective_charge_sum = 0.0
 total_data_effective_charge_error_sum = 0.0
-total_dummy_effective_charge_error_sum = 0.0
-total_dummy_effective_charge_cal = 0.0
-total_dummy_effective_charge_cal_error = 0.0
+#total_dummy_effective_charge_error_sum = 0.0
+#total_dummy_effective_charge_cal = 0.0
+#total_dummy_effective_charge_cal_error = 0.0
 
 # Detector (HMS Cer + HMS Cal) Efficiencies
 hms_Cer_detector_efficiency = 0.9981
@@ -134,8 +134,8 @@ for index, row in filtered_data_df.iterrows():
     data_hms_tracking_efficiency = row['HMS_Elec_SING_TRACK_EFF']  # Assuming 'HMS Tracking_Efficiency' is a column in your CSV
     data_shms_tracking_efficiency = row['SHMS_Prot_SING_TRACK_EFF']  # Assuming 'SHMS Tracking_Efficiency' is a column in your CSV
     data_hms_hodo_3_of_4_efficiency = row['HMS_Hodo_3_of_4_EFF']
-#    data_shms_hodo_3_of_4_efficiency = row['SHMS_Hodo_3_of_4_EFF']
-    data_shms_hodo_3_of_4_efficiency = 0.99
+    data_shms_hodo_3_of_4_efficiency = row['SHMS_Hodo_3_of_4_EFF']
+#    data_shms_hodo_3_of_4_efficiency = 0.99
     data_edtm_livetime_Corr = row['Non_Scaler_EDTM_Live_Time_Corr']
     data_BCM2_Beam_Cut_Current = row['BCM2_Beam_Cut_Current']
 
@@ -185,7 +185,7 @@ for index, row in filtered_data_df.iterrows():
 #    data_current_error = data_BCM2_Beam_Cut_Current * math.sqrt((d_slope/slope)**2 + (d_amplitude / (slope * data_BCM2_Beam_Cut_Current))**2)
 
     data_product = (data_charge * data_hms_tracking_efficiency * data_shms_tracking_efficiency * hms_Cer_detector_efficiency * hms_Cal_detector_efficiency * data_hms_hodo_3_of_4_efficiency * data_shms_hodo_3_of_4_efficiency * data_edtm_livetime_Corr * data_Boiling_factor)
-    data_product_error = data_product * (math.sqrt((data_charge_error/data_charge)** 2 +  (data_hms_tracking_efficiency_error/data_hms_tracking_efficiency)** 2 + (data_shms_tracking_efficiency_error/data_shms_tracking_efficiency)** 2 + (data_edtm_livetime_Corr_error/data_edtm_livetime_Corr)** 2 + (hms_Cer_detector_efficiency_error/hms_Cer_detector_efficiency)** 2 + (hms_Cal_detector_efficiency_error/hms_Cal_detector_efficiency)** 2 + (data_hms_hodo_3_of_4_efficiency_error/data_hms_hodo_3_of_4_efficiency)** 2 + (data_shms_hodo_3_of_4_efficiency_error/data_shms_hodo_3_of_4_efficiency)** 2 + (data_Boiling_factor_error/data_Boiling_factor)** 2)) 
+    data_product_error = data_product * (math.sqrt((data_charge_error/data_charge)** 2 +  (data_hms_tracking_efficiency_error/data_hms_tracking_efficiency)** 2 + (data_shms_tracking_efficiency_error/data_shms_tracking_efficiency)** 2 + (data_edtm_livetime_Corr_error/data_edtm_livetime_Corr)** 2 + (hms_Cer_detector_efficiency_error/hms_Cer_detector_efficiency)** 2 + (hms_Cal_detector_efficiency_error/hms_Cal_detector_efficiency)** 2 + (data_hms_hodo_3_of_4_efficiency_error/data_hms_hodo_3_of_4_efficiency)** 2 + (data_shms_hodo_3_of_4_efficiency_error/data_shms_hodo_3_of_4_efficiency)** 2 + (data_Boiling_factor_error/data_Boiling_factor)** 2))
 
     total_data_effective_charge_sum += data_product
     total_data_effective_charge_error_sum += (data_product_error)** 2
@@ -203,7 +203,7 @@ total_data_effective_charge = total_data_effective_charge_sum
 total_data_effective_charge_error = math.sqrt(total_data_effective_charge_error_sum)
 
 #------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
+'''
 row_dummy = []
 
 for index, row in filtered_dummy_df.iterrows():
@@ -211,43 +211,42 @@ for index, row in filtered_dummy_df.iterrows():
     dummy_hms_tracking_efficiency = row['HMS_Elec_SING_TRACK_EFF']  # Assuming 'HMS Efficiency' is a column in your CSV
     dummy_shms_tracking_efficiency = row['SHMS_Prot_SING_TRACK_EFF']  # Assuming 'SHMS Efficiency' is a column in your CSV
     dummy_hms_hodo_3_of_4_efficiency = row['HMS_Hodo_3_of_4_EFF']
-#    dummy_shms_hodo_3_of_4_efficiency = row['SHMS_Hodo_3_of_4_EFF']
-    dummy_shms_hodo_3_of_4_efficiency = 0.99
+    dummy_shms_hodo_3_of_4_efficiency = row['SHMS_Hodo_3_of_4_EFF']
     dummy_edtm_livetime_Corr = row['Non_Scaler_EDTM_Live_Time_Corr']
 
 #    dummy_charge_error = row['BCM2_Charge_ERROR']
     dummy_hms_tracking_efficiency_error = row['HMS_Elec_SING_TRACK_EFF_ERROR']
     dummy_shms_tracking_efficiency_error = row['SHMS_Prot_SING_TRACK_EFF_ERROR']
+#    dummy_hms_hodo_3_of_4_efficiency_error = row['HMS_Hodo_3_of_4_EFF_ERROR']
+#    dummy_shms_hodo_3_of_4_efficiency_error = row['SHMS_Hodo_3_of_4_EFF_ERROR']
     dummy_edtm_livetime_Corr_error = row['Non_Scaler_EDTM_Live_Time_Corr_ERROR']
+
+    # Assuming Uncertainities for the following variabes - needs to calculate it later
+    dummy_charge_error = 0.0
     dummy_hms_hodo_3_of_4_efficiency_error = row['HMS_Elec_SING_TRACK_EFF_ERROR']
     dummy_shms_hodo_3_of_4_efficiency_error = row['SHMS_Prot_SING_TRACK_EFF_ERROR']
 
-#    dummy_hms_hodo_3_of_4_efficiency_error = row['HMS_Hodo_3_of_4_EFF_ERROR']
-#    dummy_shms_hodo_3_of_4_efficiency_error = row['SHMS_Hodo_3_of_4_EFF_ERROR']
-
     # Calculating Current and Charge uncertainities
-    dummy_run_number = row['Run_Number']
-    dummy_run_time = row['BCM_Cut_HMS_Run_Length']
-    if dummy_run_number <= 11988:
-        dummy_slope = 5598.59 * 1000
-        dummy_d_slope = 26.7 * 1000
-        dummy_amplitude = 250356
-        dummy_d_amplitude = 606.91
-    elif 11988 < dummy_run_number <= 14777:
-        dummy_slope = 5513.79 * 1000
-        dummy_d_slope = 7.6 * 1000
-        dummy_amplitude = 250429
-        dummy_d_amplitude = 271
-    elif 14777 < dummy_run_number <= 17000:
-        dummy_slope = 5542 * 1000
-        dummy_d_slope = 11.5 * 1000
-        dummy_amplitude = 250029
-        dummy_d_amplitude = 270
-    else:
-        print("Requires correct run number")
-        continue
-
-    dummy_charge_error = math.sqrt(((dummy_charge * dummy_d_slope)**2 + (dummy_d_amplitude * dummy_run_time)**2)/(dummy_slope)**2)
+#    dummy_run_number = row['Run_Number']
+#    dummy_run_time = row['SHMS_Run_Length']
+#    if dummy_run_number <= 11988:
+#        slope = 5598.59
+#        d_slope = 26.7
+#        amplitude = 250356
+#        d_amplitude = 606.91
+#    elif 11988 < dummy_run_number <= 14777:
+#        slope = 5513.79
+#        d_slope = 7.6
+#        amplitude = 250429
+#        d_amplitude = 271
+#    elif 14777 < dummy_run_number <= 17000:
+#        slope = 5542
+#        d_slope = 11.5
+#        amplitude = 250029
+#        d_amplitude = 270
+#    else:
+#        print("Requires correct run number")
+#        continue
 
 #    dummy_charge_error = dummy_charge * math.sqrt((d_slope/slope)**2 + ((d_amplitude * dummy_run_time)/(slope * dummy_charge))**2)
 #    dummy_current_error = dummy_BCM2_Beam_Cut_Current * math.sqrt((d_slope/slope)**2 + (d_amplitude / (slope * dummy_BCM2_Beam_Cut_Current))**2)
@@ -286,7 +285,7 @@ total_dummy_effective_charge_error = total_dummy_effective_charge * math.sqrt((t
 
 print("\nTotal effective charge for the data run list: {:.5f} ± {:.5f}".format(total_data_effective_charge, total_data_effective_charge_error))
 print("\nTotal effective charge for the dummy run list: {:.5f} ± {:.5f}".format(total_dummy_effective_charge, total_dummy_effective_charge_error))
-
+'''
 ###############################################################################################################################################
 ROOT.gROOT.SetBatch(ROOT.kTRUE) # Set ROOT to batch mode explicitly, does not splash anything to screen
 ###############################################################################################################################################
@@ -316,7 +315,7 @@ print("-"*40)
 # Read stuff from the main event tree
 
 infile_DATA = ROOT.TFile.Open(rootFile_DATA, "READ")
-infile_DUMMY = ROOT.TFile.Open(rootFile_DUMMY, "READ")
+#infile_DUMMY = ROOT.TFile.Open(rootFile_DUMMY, "READ")
 infile_SIMC = ROOT.TFile.Open(rootFile_SIMC, "READ")
 
 #Uncut_Proton_Events_Data_tree = infile_DATA.Get("Uncut_Proton_Events")
@@ -326,8 +325,8 @@ nEntries_TBRANCH_DATA  = Cut_Proton_Events_Prompt_Data_tree.GetEntries()
 
 #Uncut_Proton_Events_Dummy_tree = infile_DUMMY.Get("Uncut_Proton_Events")
 #Cut_Proton_Events_All_Dummy_tree = infile_DUMMY.Get("Cut_Proton_Events_All")
-Cut_Proton_Events_Prompt_Dummy_tree = infile_DUMMY.Get("Cut_Proton_Events_Prompt")
-nEntries_TBRANCH_DUMMY  = Cut_Proton_Events_Prompt_Dummy_tree.GetEntries()
+#Cut_Proton_Events_Prompt_Dummy_tree = infile_DUMMY.Get("Cut_Proton_Events_Prompt")
+#nEntries_TBRANCH_DUMMY  = Cut_Proton_Events_Prompt_Dummy_tree.GetEntries()
 
 Uncut_Proton_Events_SIMC_tree = infile_SIMC.Get("h10")
 nEntries_TBRANCH_SIMC  = Uncut_Proton_Events_SIMC_tree.GetEntries()
@@ -387,7 +386,7 @@ P_kin_secondary_emiss_protons_dummysub_data_cut_all = ROOT.TH1D("P_kin_secondary
 P_kin_secondary_Mrecoil_protons_dummysub_data_cut_all = ROOT.TH1D("P_kin_secondary_Mrecoil_protons_dummysub_data_cut_all", "Mrecoil Distribution; Mrecoil; Counts", nbins, -0.8, 0.8)
 P_kin_secondary_W_protons_dummysub_data_cut_all = ROOT.TH1D("P_kin_secondary_W_protons_dummysub_data_cut_all", "W Distribution; W; Counts", nbins, 0, 2.0)
 MMsquared_dummysub_data_cut_all = ROOT.TH1D("MMsquared_dummysub_data_cut_all", "Missing Mass Squared; MM^{2}_{p}; Counts", nbins, -1., 1.)
-
+'''
 # Cut (Acceptance + PID + Prompt Selection) Dummy Histograms
 H_gtr_beta_protons_dummy_prompt_cut_all = ROOT.TH1D("H_gtr_beta_protons_dummy_prompt_cut_all", "HMS #beta; HMS_gtr_#beta; Counts", nbins, 0.8, 1.2)
 H_gtr_xp_protons_dummy_prompt_cut_all = ROOT.TH1D("H_gtr_xp_protons_dummy_prompt_cut_all", "HMS xptar; HMS_gtr_xptar; Counts", nbins, -0.2, 0.2)
@@ -438,7 +437,7 @@ P_kin_secondary_emiss_protons_dummy_prompt_cut_all = ROOT.TH1D("P_kin_secondary_
 P_kin_secondary_Mrecoil_protons_dummy_prompt_cut_all = ROOT.TH1D("P_kin_secondary_Mrecoil_protons_dummy_prompt_cut_all", "Mrecoil Distribution; Mrecoil; Counts", nbins, -0.8, 0.8)
 P_kin_secondary_W_protons_dummy_prompt_cut_all = ROOT.TH1D("P_kin_secondary_W_protons_dummy_prompt_cut_all", "W Distribution; W; Counts", nbins, 0, 2.0)
 MMsquared_dummy_prompt_cut_all = ROOT.TH1D("MMsquared_dummy_prompt_cut_all", "Missing Mass Squared; MM^{2}_{p}; Counts", nbins, -1., 1.)
-
+'''
 # Uncut SIMC Histograms
 H_hsdelta_protons_simc_cut_all = ROOT.TH1D("H_hsdelta_protons_simc_cut_all", "HMS #delta; HMS_#delta; Counts", nbins, -15, 15)
 H_hsxptar_protons_simc_cut_all = ROOT.TH1D("H_hsxptar_protons_simc_cut_all", "HMS xptar; HMS_xptar; Counts", nbins, -0.2, 0.2)
@@ -481,7 +480,7 @@ MMp_protons_simc_cut_all = ROOT.TH1D("MMp_protons_simc_cut_all", "MIssing Mass S
 
 # Histograms for Error Calculations 
 P_kin_secondary_pmiss_x_protons_data_prompt_cut_all_error = ROOT.TH1D("P_kin_secondary_pmiss_x_protons_data_prompt_cut_all_error", "Momentum_x Distribution; pmiss_x; Counts", nbins, -1.0, 1.0) 
-P_kin_secondary_pmiss_x_protons_dummy_prompt_cut_all_error = ROOT.TH1D("P_kin_secondary_pmiss_x_protons_dummy_prompt_cut_all_error", "Momentum_x Distribution; pmiss_x; Counts", nbins, -1.0, 1.0)
+#P_kin_secondary_pmiss_x_protons_dummy_prompt_cut_all_error = ROOT.TH1D("P_kin_secondary_pmiss_x_protons_dummy_prompt_cut_all_error", "Momentum_x Distribution; pmiss_x; Counts", nbins, -1.0, 1.0)
 pmiss_x_protons_simc_cut_all_error = ROOT.TH1D("pmiss_x_protons_simc_cut_all_error", "Momentum_x Distribution; pmiss_x; Counts", nbins, -1.0, 1.0)
 pmiss_x_protons_simc_cut_all_norm_error = ROOT.TH1D("pmiss_x_protons_simc_cut_all_norm_error", "Momentum_x Distribution; pmiss_x; Counts", nbins, -1.0, 1.0)
 
@@ -494,7 +493,7 @@ H_gtr_yp_vs_MMp_protons_dummysub_data_cut_all = ROOT.TH2D("H_gtr_yp_vs_MMp_proto
 P_gtr_yp_vs_MMp_protons_dummysub_data_cut_all = ROOT.TH2D("P_gtr_yp_vs_MMp_protons_dummysub_data_cut_all", "SHMS yptar vs Missing Mass (DATA); P_gtr_yp; MM_{p}", nbins, -0.04, 0.04, nbins, 0.0, 0.2)
 H_gtr_dp_vs_P_gtr_dp_protons_dummysub_data_cut_all = ROOT.TH2D("H_gtr_dp_vs_P_gtr_dp_protons_dummysub_data_cut_all", "HMS #delta vs SHMS #delta (DATA); H_gtr_dp; P_gtr_dp", nbins, -6, 6, nbins, -6, 6)
 H_gtr_yp_vs_P_gtr_yp_protons_dummysub_data_cut_all = ROOT.TH2D("H_gtr_yp_vs_P_gtr_yp_protons_dummysub_data_cut_all", "HMS yptar vs SHMS yptar (DATA); H_gtr_yp; P_gtr_yp", nbins, -0.04, 0.04, nbins, -0.04, 0.04)
-
+'''
 H_gtr_dp_vs_MMp_protons_dummy_prompt_cut_all = ROOT.TH2D("H_gtr_dp_vs_MMp_protons_dummy_prompt_cut_all", "HMS #delta vs Missing Mass (DATA); H_gtr_dp; MM_{p}", nbins, -6, 6, nbins, 0.0, 0.2)
 P_gtr_dp_vs_MMp_protons_dummy_prompt_cut_all = ROOT.TH2D("P_gtr_dp_vs_MMp_protons_dummy_prompt_cut_all", "SHMS #delta vs Missing Mass (DATA); P_gtr_dp; MM_{p}", nbins, -6, 6, nbins, 0.0, 0.2)
 H_gtr_dp_vs_H_gtr_yp_protons_dummy_prompt_cut_all = ROOT.TH2D("H_gtr_dp_vs_H_gtr_yp_protons_dummy_prompt_cut_all", "HMS #delta vs HMS yptar (DATA); H_gtr_dp; H_gtr_yp", nbins, -6, 6, nbins, -0.04, 0.04)
@@ -503,7 +502,7 @@ H_gtr_yp_vs_MMp_protons_dummy_prompt_cut_all = ROOT.TH2D("H_gtr_yp_vs_MMp_proton
 P_gtr_yp_vs_MMp_protons_dummy_prompt_cut_all = ROOT.TH2D("P_gtr_yp_vs_MMp_protons_dummy_prompt_cut_all", "SHMS yptar vs Missing Mass (DATA); P_gtr_yp; MM_{p}", nbins, -0.04, 0.04, nbins, 0.0, 0.2)
 H_gtr_dp_vs_P_gtr_dp_protons_dummy_prompt_cut_all = ROOT.TH2D("H_gtr_dp_vs_P_gtr_dp_protons_dummy_prompt_cut_all", "HMS #delta vs SHMS #delta (DATA); H_gtr_dp; P_gtr_dp", nbins, -6, 6, nbins, -6, 6)
 H_gtr_yp_vs_P_gtr_yp_protons_dummy_prompt_cut_all = ROOT.TH2D("H_gtr_yp_vs_P_gtr_yp_protons_dummy_prompt_cut_all", "HMS yptar vs SHMS yptar (DATA); H_gtr_yp; P_gtr_yp", nbins, -0.04, 0.04, nbins, -0.04, 0.04)
-
+'''
 H_hsdelta_vs_MMp_protons_simc_cut_all = ROOT.TH2D("H_hsdelta_vs_MMp_protons_simc_cut_all", "HMS #delta vs Missing Mass (SIMC); H_hsdelta; MM_{p}", nbins, -6, 6, nbins, 0.0, 0.2)
 P_ssdelta_vs_MMp_protons_simc_cut_all = ROOT.TH2D("P_ssdelta_vs_MMp_protons_simc_cut_all", "SHMS #delta vs Missing Mass (SIMC); P_ssdelta; MM_{p}", nbins, -6, 6, nbins, 0.0, 0.2)
 H_hsdelta_vs_H_hsyptar_protons_simc_cut_all = ROOT.TH2D("H_hsdelta_vs_H_hsyptar_protons_simc_cut_all", "HMS #delta vs HMS yptar (SIMC); H_hsdelta; H_hsyptar", nbins, -6, 6, nbins, -0.04, 0.04)
@@ -517,8 +516,7 @@ H_hsyptar_vs_P_ssyptar_protons_simc_cut_all = ROOT.TH2D("H_hsyptar_vs_P_ssyptar_
 
 #Fill histograms for Dummy Subtraction
 for event in Cut_Proton_Events_Prompt_Data_tree:
-    DataCut = (event.MMp < 0.10)
-    if (DataCut):
+    if event.MMp<0.10:
         H_gtr_beta_protons_dummysub_data_cut_all.Fill(event.H_gtr_beta)
         H_gtr_xp_protons_dummysub_data_cut_all.Fill(event.H_gtr_xp)
         H_gtr_yp_protons_dummysub_data_cut_all.Fill(event.H_gtr_yp)
@@ -579,73 +577,72 @@ for event in Cut_Proton_Events_Prompt_Data_tree:
         H_gtr_dp_vs_P_gtr_dp_protons_dummysub_data_cut_all.Fill(event.H_gtr_dp, event.P_gtr_dp)
         H_gtr_yp_vs_P_gtr_yp_protons_dummysub_data_cut_all.Fill(event.H_gtr_yp, event.P_gtr_dp)
 #    ibin += 1
-
+'''
 # Fill histograms from DUMMY ROOT File
 #ibin = 1
 for event in Cut_Proton_Events_Prompt_Dummy_tree:
-    DummyCut = (event.MMp < 0.10)
-    if (DummyCut):
-        H_gtr_beta_protons_dummy_prompt_cut_all.Fill(event.H_gtr_beta)
-        H_gtr_xp_protons_dummy_prompt_cut_all.Fill(event.H_gtr_xp)
-        H_gtr_yp_protons_dummy_prompt_cut_all.Fill(event.H_gtr_yp)
-        H_gtr_dp_protons_dummy_prompt_cut_all.Fill(event.H_gtr_dp)
-        H_gtr_p_protons_dummy_prompt_cut_all.Fill(event.H_gtr_p)
-        H_dc_x_fp_protons_dummy_prompt_cut_all.Fill(event.H_dc_x_fp)
-        H_dc_y_fp_protons_dummy_prompt_cut_all.Fill(event.H_dc_y_fp)
-        H_dc_xp_fp_protons_dummy_prompt_cut_all.Fill(event.H_dc_xp_fp)
-        H_dc_yp_fp_protons_dummy_prompt_cut_all.Fill(event.H_dc_yp_fp)
-        H_hod_goodscinhit_protons_dummy_prompt_cut_all.Fill(event.H_hod_goodscinhit)
-        H_hod_goodstarttime_protons_dummy_prompt_cut_all.Fill(event.H_hod_goodstarttime)
-        H_cal_etotnorm_protons_dummy_prompt_cut_all.Fill(event.H_cal_etotnorm)
-        H_cal_etottracknorm_protons_dummy_prompt_cut_all.Fill(event.H_cal_etottracknorm)
-        H_cer_npeSum_protons_dummy_prompt_cut_all.Fill(event.H_cer_npeSum)
-        H_RFTime_Dist_protons_dummy_prompt_cut_all.Fill(event.H_RF_Dist)
-        P_gtr_beta_protons_dummy_prompt_cut_all.Fill(event.P_gtr_beta)
-        P_gtr_xp_protons_dummy_prompt_cut_all.Fill(event.P_gtr_xp)
-        P_gtr_yp_protons_dummy_prompt_cut_all.Fill(event.P_gtr_yp)
-        P_gtr_dp_protons_dummy_prompt_cut_all.Fill(event.P_gtr_dp)
-        P_gtr_p_protons_dummy_prompt_cut_all.Fill(event.P_gtr_p)
-        P_dc_x_fp_protons_dummy_prompt_cut_all.Fill(event.P_dc_x_fp)
-        P_dc_y_fp_protons_dummy_prompt_cut_all.Fill(event.P_dc_y_fp)
-        P_dc_xp_fp_protons_dummy_prompt_cut_all.Fill(event.P_dc_xp_fp)
-        P_dc_yp_fp_protons_dummy_prompt_cut_all.Fill(event.P_dc_yp_fp)
-        P_hod_goodscinhit_protons_dummy_prompt_cut_all.Fill(event.P_hod_goodscinhit)
-        P_hod_goodstarttime_protons_dummy_prompt_cut_all.Fill(event.P_hod_goodstarttime)
-        P_cal_etotnorm_protons_dummy_prompt_cut_all.Fill(event.P_cal_etotnorm)
-        P_cal_etottracknorm_protons_dummy_prompt_cut_all.Fill(event.P_cal_etottracknorm)
-        P_hgcer_npeSum_protons_dummy_prompt_cut_all.Fill(event.P_hgcer_npeSum)
-        P_hgcer_xAtCer_protons_dummy_prompt_cut_all.Fill(event.P_hgcer_xAtCer)
-        P_hgcer_yAtCer_protons_dummy_prompt_cut_all.Fill(event.P_hgcer_yAtCer)
-        P_ngcer_npeSum_protons_dummy_prompt_cut_all.Fill(event.P_ngcer_npeSum)
-        P_ngcer_xAtCer_protons_dummy_prompt_cut_all.Fill(event.P_ngcer_xAtCer)
-        P_ngcer_yAtCer_protons_dummy_prompt_cut_all.Fill(event.P_ngcer_yAtCer)
-        P_aero_npeSum_protons_dummy_prompt_cut_all.Fill(event.P_aero_npeSum)
-        P_aero_xAtAero_protons_dummy_prompt_cut_all.Fill(event.P_aero_xAtAero)
-        P_aero_yAtAero_protons_dummy_prompt_cut_all.Fill(event.P_aero_yAtAero)
-        P_kin_MMp_protons_dummy_prompt_cut_all.Fill(event.MMp)
-        P_RFTime_Dist_protons_dummy_prompt_cut_all.Fill(event.P_RF_Dist)
-        CTime_epCoinTime_ROC1_protons_dummy_prompt_cut_all.Fill(event.CTime_epCoinTime_ROC1)
-        P_kin_secondary_pmiss_protons_dummy_prompt_cut_all.Fill(event.pmiss)
-        P_kin_secondary_pmiss_x_protons_dummy_prompt_cut_all.Fill(event.pmiss_x)
-        P_kin_secondary_pmiss_y_protons_dummy_prompt_cut_all.Fill(event.pmiss_y)
-        P_kin_secondary_pmiss_z_protons_dummy_prompt_cut_all.Fill(event.pmiss_z)
-        P_kin_secondary_Erecoil_protons_dummy_prompt_cut_all.Fill(event.Erecoil)
-        P_kin_secondary_emiss_protons_dummy_prompt_cut_all.Fill(event.emiss)
-        P_kin_secondary_Mrecoil_protons_dummy_prompt_cut_all.Fill(event.Mrecoil)
-        P_kin_secondary_W_protons_dummy_prompt_cut_all.Fill(event.W)
-        MMsquared_dummy_prompt_cut_all.Fill(event.MMp*event.MMp)
-        P_kin_secondary_pmiss_x_protons_dummy_prompt_cut_all_error.Fill(event.pmiss_x)
-        #2D Histograms
-        H_gtr_dp_vs_MMp_protons_dummy_prompt_cut_all.Fill(event.H_gtr_dp, event.MMp)
-        P_gtr_dp_vs_MMp_protons_dummy_prompt_cut_all.Fill(event.P_gtr_dp, event.MMp)
-        H_gtr_dp_vs_H_gtr_yp_protons_dummy_prompt_cut_all.Fill(event.H_gtr_dp, event.H_gtr_yp)
-        P_gtr_dp_vs_P_gtr_yp_protons_dummy_prompt_cut_all.Fill(event.P_gtr_dp, event.P_gtr_yp)
-        H_gtr_yp_vs_MMp_protons_dummy_prompt_cut_all.Fill(event.H_gtr_yp, event.MMp)
-        P_gtr_yp_vs_MMp_protons_dummy_prompt_cut_all.Fill(event.P_gtr_yp, event.MMp)
-        H_gtr_dp_vs_P_gtr_dp_protons_dummy_prompt_cut_all.Fill(event.H_gtr_dp, event.P_gtr_dp)
-        H_gtr_yp_vs_P_gtr_yp_protons_dummy_prompt_cut_all.Fill(event.H_gtr_yp, event.P_gtr_dp)
+#if event.MMp<0.10:
+    H_gtr_beta_protons_dummy_prompt_cut_all.Fill(event.H_gtr_beta)
+    H_gtr_xp_protons_dummy_prompt_cut_all.Fill(event.H_gtr_xp)
+    H_gtr_yp_protons_dummy_prompt_cut_all.Fill(event.H_gtr_yp)
+    H_gtr_dp_protons_dummy_prompt_cut_all.Fill(event.H_gtr_dp)
+    H_gtr_p_protons_dummy_prompt_cut_all.Fill(event.H_gtr_p)
+    H_dc_x_fp_protons_dummy_prompt_cut_all.Fill(event.H_dc_x_fp)
+    H_dc_y_fp_protons_dummy_prompt_cut_all.Fill(event.H_dc_y_fp)
+    H_dc_xp_fp_protons_dummy_prompt_cut_all.Fill(event.H_dc_xp_fp)
+    H_dc_yp_fp_protons_dummy_prompt_cut_all.Fill(event.H_dc_yp_fp)
+    H_hod_goodscinhit_protons_dummy_prompt_cut_all.Fill(event.H_hod_goodscinhit)
+    H_hod_goodstarttime_protons_dummy_prompt_cut_all.Fill(event.H_hod_goodstarttime)
+    H_cal_etotnorm_protons_dummy_prompt_cut_all.Fill(event.H_cal_etotnorm)
+    H_cal_etottracknorm_protons_dummy_prompt_cut_all.Fill(event.H_cal_etottracknorm)
+    H_cer_npeSum_protons_dummy_prompt_cut_all.Fill(event.H_cer_npeSum)
+    H_RFTime_Dist_protons_dummy_prompt_cut_all.Fill(event.H_RF_Dist)
+    P_gtr_beta_protons_dummy_prompt_cut_all.Fill(event.P_gtr_beta)
+    P_gtr_xp_protons_dummy_prompt_cut_all.Fill(event.P_gtr_xp)
+    P_gtr_yp_protons_dummy_prompt_cut_all.Fill(event.P_gtr_yp)
+    P_gtr_dp_protons_dummy_prompt_cut_all.Fill(event.P_gtr_dp)
+    P_gtr_p_protons_dummy_prompt_cut_all.Fill(event.P_gtr_p)
+    P_dc_x_fp_protons_dummy_prompt_cut_all.Fill(event.P_dc_x_fp)
+    P_dc_y_fp_protons_dummy_prompt_cut_all.Fill(event.P_dc_y_fp)
+    P_dc_xp_fp_protons_dummy_prompt_cut_all.Fill(event.P_dc_xp_fp)
+    P_dc_yp_fp_protons_dummy_prompt_cut_all.Fill(event.P_dc_yp_fp)
+    P_hod_goodscinhit_protons_dummy_prompt_cut_all.Fill(event.P_hod_goodscinhit)
+    P_hod_goodstarttime_protons_dummy_prompt_cut_all.Fill(event.P_hod_goodstarttime)
+    P_cal_etotnorm_protons_dummy_prompt_cut_all.Fill(event.P_cal_etotnorm)
+    P_cal_etottracknorm_protons_dummy_prompt_cut_all.Fill(event.P_cal_etottracknorm)
+    P_hgcer_npeSum_protons_dummy_prompt_cut_all.Fill(event.P_hgcer_npeSum)
+    P_hgcer_xAtCer_protons_dummy_prompt_cut_all.Fill(event.P_hgcer_xAtCer)
+    P_hgcer_yAtCer_protons_dummy_prompt_cut_all.Fill(event.P_hgcer_yAtCer)
+    P_ngcer_npeSum_protons_dummy_prompt_cut_all.Fill(event.P_ngcer_npeSum)
+    P_ngcer_xAtCer_protons_dummy_prompt_cut_all.Fill(event.P_ngcer_xAtCer)
+    P_ngcer_yAtCer_protons_dummy_prompt_cut_all.Fill(event.P_ngcer_yAtCer)
+    P_aero_npeSum_protons_dummy_prompt_cut_all.Fill(event.P_aero_npeSum)
+    P_aero_xAtAero_protons_dummy_prompt_cut_all.Fill(event.P_aero_xAtAero)
+    P_aero_yAtAero_protons_dummy_prompt_cut_all.Fill(event.P_aero_yAtAero)
+    P_kin_MMp_protons_dummy_prompt_cut_all.Fill(event.MMp)
+    P_RFTime_Dist_protons_dummy_prompt_cut_all.Fill(event.P_RF_Dist)
+    CTime_epCoinTime_ROC1_protons_dummy_prompt_cut_all.Fill(event.CTime_epCoinTime_ROC1)
+    P_kin_secondary_pmiss_protons_dummy_prompt_cut_all.Fill(event.pmiss)
+    P_kin_secondary_pmiss_x_protons_dummy_prompt_cut_all.Fill(event.pmiss_x)
+    P_kin_secondary_pmiss_y_protons_dummy_prompt_cut_all.Fill(event.pmiss_y)
+    P_kin_secondary_pmiss_z_protons_dummy_prompt_cut_all.Fill(event.pmiss_z)
+    P_kin_secondary_Erecoil_protons_dummy_prompt_cut_all.Fill(event.Erecoil)
+    P_kin_secondary_emiss_protons_dummy_prompt_cut_all.Fill(event.emiss)
+    P_kin_secondary_Mrecoil_protons_dummy_prompt_cut_all.Fill(event.Mrecoil)
+    P_kin_secondary_W_protons_dummy_prompt_cut_all.Fill(event.W)
+    MMsquared_dummy_prompt_cut_all.Fill(event.MMp*event.MMp)
+    P_kin_secondary_pmiss_x_protons_dummy_prompt_cut_all_error.Fill(event.pmiss_x)
+    #2D Histograms
+    H_gtr_dp_vs_MMp_protons_dummy_prompt_cut_all.Fill(event.H_gtr_dp, event.MMp)
+    P_gtr_dp_vs_MMp_protons_dummy_prompt_cut_all.Fill(event.P_gtr_dp, event.MMp)
+    H_gtr_dp_vs_H_gtr_yp_protons_dummy_prompt_cut_all.Fill(event.H_gtr_dp, event.H_gtr_yp)
+    P_gtr_dp_vs_P_gtr_yp_protons_dummy_prompt_cut_all.Fill(event.P_gtr_dp, event.P_gtr_yp)
+    H_gtr_yp_vs_MMp_protons_dummy_prompt_cut_all.Fill(event.H_gtr_yp, event.MMp)
+    P_gtr_yp_vs_MMp_protons_dummy_prompt_cut_all.Fill(event.P_gtr_yp, event.MMp)
+    H_gtr_dp_vs_P_gtr_dp_protons_dummy_prompt_cut_all.Fill(event.H_gtr_dp, event.P_gtr_dp)
+    H_gtr_yp_vs_P_gtr_yp_protons_dummy_prompt_cut_all.Fill(event.H_gtr_yp, event.P_gtr_dp)
 #    ibin += 1
-
+'''
 # Fill histograms from SIMC ROOT File
 for event in Uncut_Proton_Events_SIMC_tree:
     # Define the acceptance cuts
@@ -655,8 +652,7 @@ for event in Uncut_Proton_Events_SIMC_tree:
         # Calculate the missing mass
         MMp_simc = math.sqrt(abs(event.Em**2 - event.Pm**2))
         # Apply the missing mass cut (MMp < 0.1)
-        SIMCCut = (MMp_simc < 0.10)
-        if (SIMCCut):
+        if MMp_simc < 0.1:
             H_hsdelta_protons_simc_cut_all.Fill(event.hsdelta, event.Weight)
             H_hsxptar_protons_simc_cut_all.Fill(event.hsxptar, event.Weight)
             H_hsyptar_protons_simc_cut_all.Fill(event.hsyptar, event.Weight)
@@ -694,16 +690,16 @@ for event in Uncut_Proton_Events_SIMC_tree:
             emiss_protons_simc_cut_all.Fill(event.Em, event.Weight)
             W_protons_simc_cut_all.Fill(event.W, event.Weight)
             MMsquared_protons_simc_cut_all.Fill(pow(event.Em, 2) - pow(event.Pm, 2), event.Weight)
-            MMp_protons_simc_cut_all.Fill(MMp_simc, event.Weight)
+            MMp_protons_simc_cut_all.Fill((math.sqrt(abs(pow(event.Em, 2) - pow(event.Pm, 2)))), event.Weight)
             pmiss_x_protons_simc_cut_all_error.Fill(event.Pmx)
             pmiss_x_protons_simc_cut_all_norm_error.Fill(event.Pmx, event.Weight)
             #2D Histograms
-            H_hsdelta_vs_MMp_protons_simc_cut_all.Fill(event.hsdelta, MMp_simc, event.Weight)
-            P_ssdelta_vs_MMp_protons_simc_cut_all.Fill(event.ssdelta, MMp_simc, event.Weight)
+            H_hsdelta_vs_MMp_protons_simc_cut_all.Fill(event.hsdelta, (math.sqrt(abs(pow(event.Em, 2) - pow(event.Pm, 2)))), event.Weight)
+            P_ssdelta_vs_MMp_protons_simc_cut_all.Fill(event.ssdelta, (math.sqrt(abs(pow(event.Em, 2) - pow(event.Pm, 2)))), event.Weight)
             H_hsdelta_vs_H_hsyptar_protons_simc_cut_all.Fill(event.hsdelta, event.hsyptar)
             P_ssdelta_vs_P_ssyptar_protons_simc_cut_all.Fill(event.ssdelta, event.ssyptar)
-            H_hsyptar_vs_MMp_protons_simc_cut_all.Fill(event.hsyptar, MMp_simc, event.Weight)
-            P_ssyptar_vs_MMp_protons_simc_cut_all.Fill(event.ssyptar, MMp_simc, event.Weight)
+            H_hsyptar_vs_MMp_protons_simc_cut_all.Fill(event.hsyptar, (math.sqrt(abs(pow(event.Em, 2) - pow(event.Pm, 2)))), event.Weight)
+            P_ssyptar_vs_MMp_protons_simc_cut_all.Fill(event.ssyptar, (math.sqrt(abs(pow(event.Em, 2) - pow(event.Pm, 2)))), event.Weight)
             H_hsdelta_vs_P_ssdelta_protons_simc_cut_all.Fill(event.hsdelta, event.ssdelta)
             H_hsyptar_vs_P_ssyptar_protons_simc_cut_all.Fill(event.hsyptar, event.ssyptar)
 
@@ -724,12 +720,12 @@ P_kin_MMp_protons_cut_random_sub.Add(P_kin_MMp_protons_cut_prompt, P_kin_MMp_pro
 #proton_absorption_correction = 0.0856
 
 normfac_data = 1.0/(total_data_effective_charge)
-normfac_dummy = 1.0/(total_dummy_effective_charge)
+#normfac_dummy = 1.0/(total_dummy_effective_charge)
 normfac_simc = (simc_normfactor)/(simc_nevents)
 
 print("-"*40)
 print ("normfac_data :", normfac_data)
-print ("normfac_dummy: ", normfac_dummy)
+#print ("normfac_dummy: ", normfac_dummy)
 print ("normfac_simc: ", normfac_simc)
 print("-"*40)
 
@@ -802,7 +798,7 @@ H_gtr_yp_vs_MMp_protons_dummysub_data_cut_all.Scale(normfac_data)
 P_gtr_yp_vs_MMp_protons_dummysub_data_cut_all.Scale(normfac_data)
 H_gtr_dp_vs_P_gtr_dp_protons_dummysub_data_cut_all.Scale(normfac_data)
 H_gtr_yp_vs_P_gtr_yp_protons_dummysub_data_cut_all.Scale(normfac_data)
-
+'''
 # Dummy Normalization
 H_gtr_beta_protons_dummy_prompt_cut_all.Scale(normfac_dummy)
 H_gtr_xp_protons_dummy_prompt_cut_all.Scale(normfac_dummy)
@@ -862,7 +858,7 @@ H_gtr_yp_vs_MMp_protons_dummy_prompt_cut_all.Scale(normfac_dummy)
 P_gtr_yp_vs_MMp_protons_dummy_prompt_cut_all.Scale(normfac_dummy)
 H_gtr_dp_vs_P_gtr_dp_protons_dummy_prompt_cut_all.Scale(normfac_dummy)
 H_gtr_yp_vs_P_gtr_yp_protons_dummy_prompt_cut_all.Scale(normfac_dummy)
-
+'''
 ############################################################################################################################################
 
 # SIMC Normalization
@@ -916,7 +912,7 @@ H_hsdelta_vs_P_ssdelta_protons_simc_cut_all.Scale(normfac_simc)
 H_hsyptar_vs_P_ssyptar_protons_simc_cut_all.Scale(normfac_simc)
 
 ############################################################################################################################################
-
+'''
 #Dummy Subtraction
 H_gtr_beta_protons_dummysub_data_cut_all.Add(H_gtr_beta_protons_dummy_prompt_cut_all,-1)
 H_gtr_xp_protons_dummysub_data_cut_all.Add(H_gtr_xp_protons_dummy_prompt_cut_all,-1)
@@ -976,7 +972,7 @@ H_gtr_yp_vs_MMp_protons_dummysub_data_cut_all.Add(H_gtr_yp_vs_MMp_protons_dummy_
 P_gtr_yp_vs_MMp_protons_dummysub_data_cut_all.Add(P_gtr_yp_vs_MMp_protons_dummy_prompt_cut_all,-1)
 H_gtr_dp_vs_P_gtr_dp_protons_dummysub_data_cut_all.Add(H_gtr_dp_vs_P_gtr_dp_protons_dummy_prompt_cut_all,-1)
 H_gtr_yp_vs_P_gtr_yp_protons_dummysub_data_cut_all.Add(H_gtr_yp_vs_P_gtr_yp_protons_dummy_prompt_cut_all,-1)
-
+'''
 ###########################################################################################################################################
 
 # Define a function for fitting a Gaussian with dynamically determined FWHM range
@@ -1114,7 +1110,6 @@ dN_simc_emiss = array.array('d', [0.0])
 dN_simc_W = array.array('d', [0.0])
 dN_simc_MMP = array.array('d', [0.0])
 
-
 N_data_hms_dp = H_gtr_dp_protons_dummysub_data_cut_all.IntegralAndError(1,nbins,dN_data_hms_dp,"")
 N_data_shms_dp = P_gtr_dp_protons_dummysub_data_cut_all.IntegralAndError(1,nbins,dN_data_shms_dp,"")
 N_data_hms_xp = H_gtr_xp_protons_dummysub_data_cut_all.IntegralAndError(1,nbins,dN_data_hms_xp,"")
@@ -1151,6 +1146,7 @@ N_simc_emiss = emiss_protons_simc_cut_all.IntegralAndError(1,nbins_p,dN_simc_emi
 N_simc_W = W_protons_simc_cut_all.IntegralAndError(1,nbins,dN_simc_W,"")
 N_simc_MMP = MMp_protons_simc_cut_all.IntegralAndError(1,nbins,dN_simc_MMP,"")
 
+
 dataSimcRatio_hdelta = N_data_hms_dp/N_simc_hsdelta
 dataSimcRatio_pdelta = N_data_shms_dp/N_simc_ssdelta
 dataSimcRatio_hxptar = N_data_hms_xp/N_simc_hsxptar
@@ -1175,12 +1171,12 @@ dataSimcRatio_MMP = N_data_MMP/N_simc_MMP
 
 # Error Propagation
 dN_data_error = array.array('d', [0.0])
-dN_dummy_error = array.array('d', [0.0])
+#dN_dummy_error = array.array('d', [0.0])
 dN_simc_error = array.array('d', [0.0])
 dN_simc_norm_error = array.array('d', [0.0])
 
 N_data = P_kin_secondary_pmiss_x_protons_data_prompt_cut_all_error.IntegralAndError(1,nbins,dN_data_error,"")
-N_dummy = P_kin_secondary_pmiss_x_protons_dummy_prompt_cut_all_error.IntegralAndError(1,nbins,dN_dummy_error,"")
+#N_dummy = P_kin_secondary_pmiss_x_protons_dummy_prompt_cut_all_error.IntegralAndError(1,nbins,dN_dummy_error,"")
 N_simc = pmiss_x_protons_simc_cut_all_error.IntegralAndError(1,nbins,dN_simc_error,"")
 N_simc_norm = pmiss_x_protons_simc_cut_all_norm_error.IntegralAndError(1,nbins,dN_simc_norm_error,"")
 
@@ -1189,15 +1185,15 @@ N_simc_norm = pmiss_x_protons_simc_cut_all_norm_error.IntegralAndError(1,nbins,d
 #dN_simc_error = math.sqrt(N_simc)
 
 N_data_norm = N_data / total_data_effective_charge
-N_dummy_norm = N_dummy / total_dummy_effective_charge
+#N_dummy_norm = N_dummy / total_dummy_effective_charge
 #N_simc_norm = N_simc * normfac_simc
 
-N_data_dummy_sub_norm = N_data_norm - N_dummy_norm
+N_data_dummy_sub_norm = N_data_norm
 dataSimcRatio = (N_data_dummy_sub_norm) / N_simc_norm
 
 dN_data_norm = N_data_norm * ma.sqrt((dN_data_error[0]/N_data)**2  + (total_data_effective_charge_error/total_data_effective_charge)**2)
-dN_dummy_norm = N_dummy_norm * ma.sqrt((dN_dummy_error[0]/N_dummy)**2 + (total_dummy_effective_charge_error/total_dummy_effective_charge)**2)
-dN_data_dummy_sub_norm = ma.sqrt((dN_data_norm)**2 + (dN_dummy_norm)**2)
+#dN_dummy_norm = N_dummy_norm * ma.sqrt((dN_dummy_error[0]/N_dummy)**2 + (total_dummy_effective_charge_error/total_dummy_effective_charge)**2)
+dN_data_dummy_sub_norm = dN_data_norm
 
 dN_simc_norm = N_simc_norm * (dN_simc_error[0]/N_simc)
 
@@ -1223,8 +1219,8 @@ print("Data/SIMC ratio W = {:.3f} +/- {:.3f}".format(dataSimcRatio_W, dataSimcRa
 print("Data/SIMC ratio MMP = {:.3f} +/- {:.3f}".format(dataSimcRatio_MMP, dataSimcRatio_err))
 print("="*40)
 
-datasimcratio_calculations = {'Variables': ['total_data_effective_charge','total_data_effective_charge_error','total_dummy_effective_charge','total_dummy_effective_charge_error','normfac_data', 'normfac_dummy', 'normfac_simc', 'N_data', 'dN_data_error', 'N_dummy', 'dN_dummy_error', 'N_simc', 'dN_simc_error', 'N_data_norm', 'N_dummy_norm', 'N_simc_norm', 'dN_data_norm', 'dN_dummy_norm', 'dN_simc_norm', 'dataSimcRatio', 'dataSimcRatio_err'],
-        'Values': [total_data_effective_charge,total_data_effective_charge_error,total_dummy_effective_charge,total_dummy_effective_charge_error,normfac_data, normfac_dummy, normfac_simc, N_data, dN_data_error[0], N_dummy, dN_dummy_error[0], N_simc, dN_simc_error[0], N_data_norm, dN_data_norm, N_dummy_norm, dN_dummy_norm, N_simc_norm, dN_simc_norm, dataSimcRatio, dataSimcRatio_err]}
+datasimcratio_calculations = {'Variables': ['total_data_effective_charge','total_data_effective_charge_error','normfac_data', 'normfac_simc', 'N_data', 'dN_data_error', 'N_simc', 'dN_simc_error', 'N_data_norm', 'N_simc_norm', 'dN_data_norm', 'dN_simc_norm', 'dataSimcRatio', 'dataSimcRatio_err'],
+        'Values': [total_data_effective_charge,total_data_effective_charge_error,normfac_data, normfac_simc, N_data, dN_data_error[0], N_simc, dN_simc_error[0], N_data_norm, dN_data_norm, N_simc_norm, dN_simc_norm, dataSimcRatio, dataSimcRatio_err]}
 df_datasimcratio_calculations_output = pd.DataFrame(datasimcratio_calculations)
 
 ##############################################################################################################################################
@@ -1761,7 +1757,7 @@ c1_2D_Dist3.Print(Proton_Analysis_Distributions+ ')')
 #############################################################################################################################################
 
 # Making directories in output file
-outHistFile = ROOT.TFile.Open("%s/%s_%s_HeePCoin_Output_Data.root" % (OUTPATH, BEAM_ENERGY, MaxEvent) , "RECREATE")
+outHistFile = ROOT.TFile.Open("%s/%s_%s_Output_Data.root" % (OUTPATH, BEAM_ENERGY, MaxEvent) , "RECREATE")
 #d_Uncut_Proton_Events_Data = outHistFile.mkdir("Uncut_Proton_Events_Data")
 #d_Cut_Proton_Events_All_Data = outHistFile.mkdir("Cut_Proton_Events_All_Data")
 #d_Cut_Proton_Events_Prompt_Data = outHistFile.mkdir("Cut_Proton_Events_Prompt_Data")
@@ -1867,7 +1863,7 @@ MMp_protons_simc_cut_all.Write()
 
 d_Cut_Proton_Events_Raw_Hist.cd()
 P_kin_secondary_pmiss_x_protons_data_prompt_cut_all_error.Write()
-P_kin_secondary_pmiss_x_protons_dummy_prompt_cut_all_error.Write()
+#P_kin_secondary_pmiss_x_protons_dummy_prompt_cut_all_error.Write()
 pmiss_x_protons_simc_cut_all_error.Write()
 
 d_Cut_Proton_Events_2D_Hist.cd()
@@ -1879,6 +1875,7 @@ H_gtr_yp_vs_MMp_protons_dummysub_data_cut_all.Write()
 P_gtr_yp_vs_MMp_protons_dummysub_data_cut_all.Write()
 H_gtr_dp_vs_P_gtr_dp_protons_dummysub_data_cut_all.Write()
 H_gtr_yp_vs_P_gtr_yp_protons_dummysub_data_cut_all.Write()
+'''
 H_gtr_dp_vs_MMp_protons_dummy_prompt_cut_all.Write()
 P_gtr_dp_vs_MMp_protons_dummy_prompt_cut_all.Write()
 H_gtr_dp_vs_H_gtr_yp_protons_dummy_prompt_cut_all.Write()
@@ -1887,6 +1884,7 @@ H_gtr_yp_vs_MMp_protons_dummy_prompt_cut_all.Write()
 P_gtr_yp_vs_MMp_protons_dummy_prompt_cut_all.Write()
 H_gtr_dp_vs_P_gtr_dp_protons_dummy_prompt_cut_all.Write()
 H_gtr_yp_vs_P_gtr_yp_protons_dummy_prompt_cut_all.Write()
+'''
 H_hsdelta_vs_MMp_protons_simc_cut_all.Write()
 P_ssdelta_vs_MMp_protons_simc_cut_all.Write()
 H_hsdelta_vs_H_hsyptar_protons_simc_cut_all.Write()
@@ -1897,7 +1895,7 @@ H_hsdelta_vs_P_ssdelta_protons_simc_cut_all.Write()
 H_hsyptar_vs_P_ssyptar_protons_simc_cut_all.Write()
 
 infile_DATA.Close() 
-infile_DUMMY.Close()       
+#infile_DUMMY.Close()       
 infile_SIMC.Close()
 outHistFile.Close()
 

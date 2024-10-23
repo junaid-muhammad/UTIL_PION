@@ -63,15 +63,15 @@ print("Running as %s on %s, hallc_replay_lt path assumed as %s" % (USER, HOST, R
 print("="*40)
 
 # Defining Variables
-E5p986_DATASIMCRatio = ufloat(0.995,0.005)
-E6p395s1_DATASIMCRatio = ufloat(1.000,0.004)
-E6p395s2_DATASIMCRatio = ufloat(0.858,0.004)
-E6p395s3_DATASIMCRatio = ufloat(1.017,0.007)
-E7p937_DATASIMCRatio = ufloat(1.002,0.008)
-E8p479_DATASIMCRatio = ufloat(1.011,0.007)
-E9p177_DATASIMCRatio = ufloat(1.027,0.014)
-E9p876_DATASIMCRatio = ufloat(1.025,0.012)
-E10p549_DATASIMCRatio = ufloat(1.021,0.010)
+E5p986_DATASIMCRatio = ufloat(0.949,0.005)
+E6p395s1_DATASIMCRatio = ufloat(0.991,0.004)
+#E6p395s2_DATASIMCRatio = ufloat(0.854,0.004)
+E6p395s3_DATASIMCRatio = ufloat(1.010,0.007)
+E7p937_DATASIMCRatio = ufloat(0.991,0.008)
+E8p479_DATASIMCRatio = ufloat(1.002,0.007)
+E9p177_DATASIMCRatio = ufloat(1.013,0.014)
+E9p876_DATASIMCRatio = ufloat(0.982,0.012)
+E10p549_DATASIMCRatio = ufloat(1.005,0.010)
 
 '''
 E5p986_BE = 5.986
@@ -87,7 +87,7 @@ E10p549_BE = 10.549
 
 E5p986_Q2 = 4.952
 E6p395s1_Q2 = 3.098
-E6p395s2_Q2 = 3.705
+#E6p395s2_Q2 = 3.705
 E6p395s3_Q2 = 6.254
 E7p937_Q2 = 8.603
 E8p479_Q2 = 5.356
@@ -101,9 +101,9 @@ print("="*40)
 
 # Create lists for x and y values along with their uncertainties
 #x_values = [E5p986_BE, E6p395s1_BE, E6p395s2_BE, E6p395s3_BE, E7p937_BE, E8p479_BE, E9p177_BE, E9p876_BE, E10p549_BE]
-x_values = [E5p986_Q2, E6p395s1_Q2, E6p395s2_Q2, E6p395s3_Q2, E7p937_Q2, E8p479_Q2, E9p177_Q2, E9p876_Q2, E10p549_Q2]
-y_values = [E5p986_DATASIMCRatio.nominal_value, E6p395s1_DATASIMCRatio.nominal_value, E6p395s2_DATASIMCRatio.nominal_value, E6p395s3_DATASIMCRatio.nominal_value, E7p937_DATASIMCRatio.nominal_value, E8p479_DATASIMCRatio.nominal_value, E9p177_DATASIMCRatio.nominal_value, E9p876_DATASIMCRatio.nominal_value, E10p549_DATASIMCRatio.nominal_value]
-yerr_values = [E5p986_DATASIMCRatio.std_dev, E6p395s1_DATASIMCRatio.std_dev, E6p395s2_DATASIMCRatio.std_dev, E6p395s3_DATASIMCRatio.std_dev, E7p937_DATASIMCRatio.std_dev, E8p479_DATASIMCRatio.std_dev, E9p177_DATASIMCRatio.std_dev, E9p876_DATASIMCRatio.std_dev, E10p549_DATASIMCRatio.std_dev]
+x_values = [E5p986_Q2, E6p395s1_Q2, E6p395s3_Q2, E7p937_Q2, E8p479_Q2, E9p177_Q2, E9p876_Q2, E10p549_Q2]
+y_values = [E5p986_DATASIMCRatio.nominal_value, E6p395s1_DATASIMCRatio.nominal_value, E6p395s3_DATASIMCRatio.nominal_value, E7p937_DATASIMCRatio.nominal_value, E8p479_DATASIMCRatio.nominal_value, E9p177_DATASIMCRatio.nominal_value, E9p876_DATASIMCRatio.nominal_value, E10p549_DATASIMCRatio.nominal_value]
+yerr_values = [E5p986_DATASIMCRatio.std_dev, E6p395s1_DATASIMCRatio.std_dev, E6p395s3_DATASIMCRatio.std_dev, E7p937_DATASIMCRatio.std_dev, E8p479_DATASIMCRatio.std_dev, E9p177_DATASIMCRatio.std_dev, E9p876_DATASIMCRatio.std_dev, E10p549_DATASIMCRatio.std_dev]
 
 print(x_values)
 print(y_values)
@@ -125,7 +125,8 @@ plt.figure(figsize=(12,8))
 plt.subplot(111)
 #plt.grid(zorder=1)
 #plt.xlim(4.0,12.0)
-plt.ylim(0.8,1.20)
+#plt.ylim(0.8,1.20)
+plt.ylim(0.9,1.10)
 plt.errorbar(x_nominals, y_nominals, yerr=y_errors, fmt='o', markersize=8, color='black', linestyle='None', capsize=4, zorder=3, label='Ratios with uncertainties')
 plt.scatter(x_nominals, y_nominals, color='blue', zorder=4, label='Ratios values')
 # Add a red reference line at y=1
